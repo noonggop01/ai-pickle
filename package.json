@@ -10,7 +10,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "research:keywords": "node scripts/agents/keyword-research.mjs"
+    "research:keywords": "node scripts/agents/keyword-research.mjs",
+    "write:draft": "node scripts/agents/draft-writer.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
