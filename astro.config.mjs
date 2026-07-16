@@ -5,7 +5,8 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  // TODO: replace with the real domain (or *.pages.dev / *.github.io URL) once hosting is connected
-  site: 'https://example.com',
+  // TODO: switch to a custom domain later — update `site` and drop `base` when that happens
+  site: 'https://noonggop01.github.io',
+  base: '/ai-pickle',
   integrations: [sitemap()]
 });

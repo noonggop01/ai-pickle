@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE } from '../site.config';
+import { withBase } from '../lib/url';
 
 const title = 'About';
 const description = `About ${SITE.name} — who we are and how we test the AI tools we review.`;
@@ -33,6 +34,6 @@ const description = `About ${SITE.name} — who we are and how we test the AI to
 
   <h2>Contact</h2>
   <p>
-    Questions, corrections, or tips? Reach out on the <a href="/contact">contact page</a>.
+    Questions, corrections, or tips? Reach out on the <a href={withBase('/contact')}>contact page</a>.
   </p>
 </BaseLayout>
