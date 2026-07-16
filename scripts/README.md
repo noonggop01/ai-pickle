@@ -21,6 +21,29 @@ there since nothing downstream has anything to work with. Ends by printing
 the post path, QA status, and the manual steps left (fill placeholders,
 verify `[SOURCE NEEDED]` claims, flip `draft: false`, commit, push).
 
+## Daily automation: `.github/workflows/daily-draft.yml`
+
+Runs `npm run pipeline` on a schedule (01:00 UTC = 10:00 KST) using the
+`ANTHROPIC_API_KEY` repo secret, and — if a new draft was produced — opens
+a pull request with it (branch `draft/<date>-<run>`) instead of pushing
+straight to `master`. **The post stays `draft: true` and does not go live
+on its own.** Deliberately no auto-publish step: this is the same
+human-review gate the pipeline already enforces locally, just triggered on
+a schedule instead of by hand. The 2026 Google spam updates specifically
+targeted scaled, unreviewed AI content, which is what this gate exists to
+avoid — see the human-review step in `pipeline.mjs`'s own comments.
+
+Reviewing a generated PR: pull the branch, fill in `[EXPERIENCE: ...]`
+placeholders (or rewrite them as general-pattern statements if there's no
+first-hand experience — never fabricate an anecdote), verify `[SOURCE
+NEEDED]` claims, flip `draft: false`, push to the branch, then merge the
+PR. Merging triggers `deploy.yml` and publishes it.
+
+Trigger a run manually (e.g. to test) with:
+```
+gh workflow run daily-draft.yml --repo noonggop01/ai-pickle
+```
+
 ## Agent 1 — Keyword Research
 
 ```
