@@ -122,7 +122,7 @@ export function checkDuplicateTopic(data, otherPosts) {
 
   let best = { slug: null, overlap: 0 };
   for (const other of otherPosts) {
-    const otherWords = new Set(significantWords(other.title ?? ''));
+    const otherWords = new Set(significantWords(other.data?.title ?? ''));
     if (otherWords.size === 0) continue;
     const intersection = [...words].filter((w) => otherWords.has(w)).length;
     const overlap = intersection / Math.min(words.size, otherWords.size);
