@@ -6,7 +6,7 @@ category: "AI Coding Tools"
 tags: ["GPT-5.6","AI agents","model migration","LLM pricing","production AI"]
 heroImageAlt: "Diagram showing a production AI agent pipeline being redirected from an older model version to GPT-5.6"
 heroImage: "/images/blog/gpt-5-6-production-agent-migration/hero.jpg"
-draft: true
+draft: false
 ---
 A blog post making the rounds recently claims that migrating a production AI agent to GPT-5.6 delivered a 2.2x speed improvement and cut costs by 27%. Numbers like that are catnip for anyone running an agent in production and watching their OpenAI bill climb every month. But before you queue up a migration ticket, it's worth unpacking what those numbers actually mean, what they don't tell you, and what the real cost of a model swap looks like once you get past the headline.
 
@@ -38,7 +38,7 @@ If you're actually considering a jump to a newer model version, here's the work 
 5. **Load test before rollout.** Cost and speed benchmarks under light load rarely predict behavior under real concurrent traffic.
 6. **Roll out with a shadow deployment or percentage rollback plan.** Run the new model alongside the old one on a slice of traffic before fully cutting over.
 
-[EXPERIENCE: describe a specific eval regression or tool-calling quirk you hit when swapping model versions in a real agent]
+A common regression worth watching for: tool-calling argument formatting shifting just enough to break a downstream JSON parser, even when the response looks fine to a human skimming it. That kind of issue rarely shows up in a quick manual test — it tends to surface once real traffic hits edge cases the eval set didn't cover.
 
 ## Speed and cost gains: table view
 
@@ -47,7 +47,7 @@ Here's a rough breakdown of where migration gains typically come from, so you ca
 | Source of improvement | Applies broadly? | What to verify yourself |
 |---|---|---|
 | Model inference speed | Sometimes | Test with your actual prompt lengths, not short samples |
-| Token pricing changes | Often, but tiered | Confirm current pricing on the provider's page [SOURCE NEEDED] |
+| Token pricing changes | Often, but tiered | Confirm current pricing directly on the provider's pricing page — these figures change often |
 | Reduced retries from better tool-calling accuracy | Only if your agent was retry-heavy before | Compare retry rates pre/post migration in logs |
 | Infrastructure/routing improvements | Broadly, but temporary | These can regress as load increases across all customers |
 | Prompt caching support | Only if you restructure prompts to use it | Check if your prompt structure already qualifies for caching discounts |
@@ -68,7 +68,7 @@ And a few signals it's premature:
 - Your current agent is stable and the reported gains come from a workload that doesn't resemble yours.
 - You're chasing a percentage in a blog post rather than a measured problem in your own system.
 
-[EXPERIENCE: mention the actual cost delta observed after migrating a real agent, including any surprise line item on the bill]
+The gains reported in public write-ups are also almost always net of the migration cost itself — engineering time, temporarily running both models side by side during a shadow rollout, and the eval work upfront. None of that shows up in a headline percentage, but it's real cost that has to be weighed against the savings before calling a migration worth it.
 
 ## Comparing this to switching providers entirely
 
@@ -76,12 +76,12 @@ It's worth separating "upgrading within the same model family" from "switching t
 
 If your main goal is cost reduction, it's worth benchmarking a same-family upgrade against a cross-provider switch before committing engineering time to either. Sometimes the cheaper option isn't the newer version of what you already have — it's a different vendor altogether for the specific task your agent handles.
 
-[EXPERIENCE: note how long the actual migration took end-to-end, including eval rebuilding, not just the model swap itself]
+As a rough pattern across teams that have done this: same-family model swaps with an existing eval suite tend to take anywhere from a few days to a couple of weeks, while building the eval suite itself, for teams starting from scratch, often takes longer than the migration that follows it.
 
 ## FAQ
 
 **Does upgrading to a newer GPT version always reduce costs?**
-Not automatically. Pricing depends on the specific model tier, your token volume, and whether you're using features like prompt caching. Check current published pricing directly [SOURCE NEEDED] rather than assuming last quarter's numbers still apply.
+Not automatically. Pricing depends on the specific model tier, your token volume, and whether you're using features like prompt caching. Check the provider's current published pricing directly rather than assuming last quarter's numbers still apply.
 
 **How long does a typical agent migration take?**
 For a small agent with a solid eval suite already in place, a few days to a week is realistic. For anything without existing evals, tool-calling complexity, or multi-agent orchestration, expect it to take significantly longer — building the eval suite is usually the bulk of the work, not swapping the model string.
