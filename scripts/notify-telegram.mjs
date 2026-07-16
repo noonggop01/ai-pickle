@@ -34,11 +34,15 @@ async function main() {
   const sourceNeededCount = [...body.matchAll(/\[SOURCE NEEDED\]/g)].length;
 
   let qaLine = '';
+  let flaggedLines = [];
   try {
     const qa = JSON.parse(await readFile(path.join(blogDir, `${slug}.qa.json`), 'utf-8'));
     const failCount = qa.checks.filter((c) => c.status === 'fail').length;
     const warnCount = qa.checks.filter((c) => c.status === 'warn').length;
     qaLine = `QA: ${qa.status.toUpperCase()} (${failCount} fail, ${warnCount} warn)\n`;
+    flaggedLines = qa.checks
+      .filter((c) => c.status !== 'pass')
+      .map((c) => `- [${c.status.toUpperCase()}] ${c.name}: ${c.message}`);
   } catch {
     // no QA report — skip that line
   }
@@ -49,6 +53,8 @@ async function main() {
     description ? `\n${description}` : null,
     '',
     qaLine.trim(),
+    flaggedLines.length > 0 ? flaggedLines.join('\n') : null,
+    '',
     `To fill in: ${experienceCount} [EXPERIENCE] placeholder(s), ${sourceNeededCount} [SOURCE NEEDED] tag(s)`,
     '',
     `Review/edit: ${prUrl}`,
