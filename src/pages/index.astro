@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../site.config';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+<BaseLayout title={SITE.name} description={SITE.description}>
+  <p class="post-meta">{SITE.tagline}</p>
+
+  {posts.length === 0 ? (
+    <p>No posts yet — check back soon.</p>
+  ) : (
+    <ul class="post-list">
+      {posts.map((post) => (
+        <li>
+          <h2><a href={`/blog/${post.id}/`}>{post.data.title}</a></h2>
+          <p class="post-meta">{dateFormatter.format(post.data.pubDate)} &middot; {post.data.category}</p>
+          <p>{post.data.description}</p>
+        </li>
+      ))}
+    </ul>
+  )}
+</BaseLayout>

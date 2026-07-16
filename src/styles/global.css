@@ -1,0 +1,123 @@
+:root {
+  --color-bg: #ffffff;
+  --color-text: #1a1a1a;
+  --color-muted: #5f6368;
+  --color-border: #e5e7eb;
+  --color-accent: #2563eb;
+  --font-body: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --max-width: 760px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0f1115;
+    --color-text: #e8e8e8;
+    --color-muted: #9aa0a6;
+    --color-border: #2a2d33;
+    --color-accent: #6ea8fe;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  line-height: 1.65;
+}
+
+.wrapper {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+a { color: var(--color-accent); }
+
+header.site-header {
+  border-bottom: 1px solid var(--color-border);
+  padding: 1.25rem 0;
+}
+
+header.site-header .wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.site-title {
+  font-weight: 700;
+  font-size: 1.15rem;
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+nav.site-nav {
+  display: flex;
+  gap: 1.25rem;
+  font-size: 0.95rem;
+}
+
+nav.site-nav a {
+  color: var(--color-muted);
+  text-decoration: none;
+}
+
+nav.site-nav a:hover { color: var(--color-accent); }
+
+main { padding: 2.5rem 0 3rem; }
+
+.post-list { list-style: none; padding: 0; margin: 0; }
+
+.post-list li {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.post-list h2 { margin: 0 0 0.35rem; font-size: 1.2rem; }
+.post-list h2 a { color: var(--color-text); text-decoration: none; }
+.post-list h2 a:hover { color: var(--color-accent); }
+
+.post-meta {
+  color: var(--color-muted);
+  font-size: 0.85rem;
+}
+
+article.post h1 { margin-bottom: 0.25rem; }
+
+article.post .post-meta { margin-bottom: 1.5rem; }
+
+article.post img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+article.post h2 { margin-top: 2rem; }
+
+article.post table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+}
+
+article.post th, article.post td {
+  border: 1px solid var(--color-border);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+
+footer.site-footer {
+  border-top: 1px solid var(--color-border);
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  padding: 1.5rem 0 2.5rem;
+}
+
+footer.site-footer nav {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
