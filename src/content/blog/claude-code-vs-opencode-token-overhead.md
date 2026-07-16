@@ -5,6 +5,7 @@ pubDate: 2026-07-16
 category: "AI Coding Tools"
 tags: ["Claude Code","OpenCode","AI coding assistants","token usage","developer tools"]
 heroImageAlt: "Split-screen visualization comparing a large token overhead block for Claude Code against a much smaller one for OpenCode"
+heroImage: "/images/blog/claude-code-vs-opencode-token-overhead/hero.jpg"
 draft: true
 ---
 Before Claude Code ever reads a single word you typed, it's already spent thousands of tokens introducing itself to the model. According to a widely shared breakdown, that overhead lands around 33,000 tokens — system prompt, tool definitions, environment context, memory files, the works — compared to roughly 7,000 tokens for OpenCode doing a conceptually similar job. That's not a rounding error. That's a nearly 5x difference before either tool has done anything useful.

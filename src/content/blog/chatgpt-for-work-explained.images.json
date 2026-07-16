@@ -1,0 +1,20 @@
+{
+  "heroImageAlt": "A person using ChatGPT on a laptop in an office setting, with documents and spreadsheets visible on screen",
+  "imageSuggestions": [
+    {
+      "placement": "After intro, before first H2",
+      "concept": "Split-screen graphic showing ChatGPT interface next to Microsoft Copilot and Google Gemini logos",
+      "altText": "Comparison graphic of ChatGPT, Microsoft Copilot, and Google Gemini for workplace use"
+    },
+    {
+      "placement": "Within the comparison table section",
+      "concept": "Simple icon-based chart summarizing which platform pairs best with which ecosystem",
+      "altText": "Chart showing ChatGPT, Copilot, and Gemini matched to Microsoft, Google, or ecosystem-agnostic teams"
+    },
+    {
+      "placement": "Near the 'Where it still struggles' section",
+      "concept": "Screenshot-style mockup of a research report with a highlighted uncertain claim",
+      "altText": "Mockup of an AI-generated research report with a flagged section needing verification"
+    }
+  ]
+}

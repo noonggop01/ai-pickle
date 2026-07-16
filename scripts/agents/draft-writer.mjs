@@ -172,18 +172,27 @@ async function main() {
 
   await writeFile(outPath, fileContents, 'utf-8');
 
+  const finalSlug = path.basename(outPath, '.md');
+  const imagesSidecarPath = path.join(blogDir, `${finalSlug}.images.json`);
+  await writeFile(
+    imagesSidecarPath,
+    JSON.stringify(
+      {
+        heroImageAlt: draft.heroImageAlt ?? title,
+        imageSuggestions: draft.imageSuggestions ?? [],
+      },
+      null,
+      2,
+    ),
+    'utf-8',
+  );
+
   console.error(`\nDraft written to ${path.relative(process.cwd(), outPath)}`);
   console.error(`  title: ${title}`);
   console.error(`  category: ${draft.category}`);
   console.error(`  experience placeholders to fill in: ${draft.experiencePlaceholderCount}`);
   console.error(`  draft: true — flip to false in the frontmatter after human review.`);
-
-  if (draft.imageSuggestions?.length) {
-    console.error('\nSuggested images (Agent 3 not built yet — for manual reference):');
-    for (const img of draft.imageSuggestions) {
-      console.error(`  - [${img.placement}] ${img.concept} (alt: "${img.altText}")`);
-    }
-  }
+  console.error(`  image suggestions saved to ${path.relative(process.cwd(), imagesSidecarPath)} for Agent 3.`);
 }
 
 main().catch((err) => {
