@@ -4,7 +4,12 @@ on:
   schedule:
     # 01:00 UTC = 10:00 KST
     - cron: '0 1 * * *'
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      index:
+        description: 'Keyword candidate index to draft (for manual testing)'
+        required: false
+        default: '0'
 
 permissions:
   contents: write
@@ -26,7 +31,7 @@ jobs:
       - run: npm ci
 
       - name: Run Agents 1-4
-        run: npm run pipeline
+        run: npm run pipeline -- --index "${{ github.event.inputs.index || '0' }}"
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
