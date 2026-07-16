@@ -83,6 +83,14 @@ function yamlString(value) {
   return JSON.stringify(value);
 }
 
+// Truncates at the last full word within maxLen instead of cutting mid-word.
+function truncateAtWord(text, maxLen) {
+  if (text.length <= maxLen) return text;
+  const cut = text.slice(0, maxLen);
+  const lastSpace = cut.lastIndexOf(' ');
+  return (lastSpace > 0 ? cut.slice(0, lastSpace) : cut).replace(/[,;:.\-–—\s]+$/, '');
+}
+
 async function pathExists(p) {
   try {
     await access(p);
@@ -138,8 +146,8 @@ async function main() {
     tool: WRITE_DRAFT_TOOL,
   });
 
-  const title = draft.title.slice(0, 60);
-  const description = draft.description.slice(0, 155);
+  const title = truncateAtWord(draft.title, 60);
+  const description = truncateAtWord(draft.description, 155);
   const slug = slugify(draft.slug || draft.title);
   const pubDate = new Date().toISOString().slice(0, 10);
 
