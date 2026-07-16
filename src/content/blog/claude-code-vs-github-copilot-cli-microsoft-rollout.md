@@ -4,7 +4,7 @@ description: "A breakdown of Microsoft's early 2026 rollout data comparing Claud
 pubDate: 2026-07-16
 category: "AI Coding Tools"
 tags: ["Claude Code","GitHub Copilot","GitHub Copilot CLI","AI coding tools","Microsoft","developer tools"]
-draft: true
+draft: false
 ---
 Microsoft doesn't usually hand a competitor's product a seat at its own table. So when reports of an internal rollout showed engineers at Microsoft using both Claude Code and GitHub Copilot CLI side by side in early 2026, it was worth paying attention to — not because it's shocking that Microsoft would test a rival tool, but because of what the comparison reveals about where command-line coding agents actually stand right now.
 
