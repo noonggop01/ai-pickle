@@ -6,10 +6,11 @@
 // public/images/blog/<slug>/, and updates the post's frontmatter/body to
 // reference them.
 
-import { mkdir, readdir, readFile, writeFile, stat } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { generateImageBuffer } from '../lib/image-provider.mjs';
 import { splitFrontmatter, getFrontmatterField, setFrontmatterField, joinFrontmatter } from '../lib/frontmatter.mjs';
+import { findLatestPostSlug } from '../lib/latest-post.mjs';
 
 // Keep in sync with `base` in astro.config.mjs — literal image paths inside
 // the Markdown body aren't rewritten by Astro at build time, unlike the
@@ -24,16 +25,6 @@ function parseArgs(argv) {
     if (argv[i] === '--slug') args.slug = argv[++i];
   }
   return args;
-}
-
-async function findLatestDraftSlug(blogDir) {
-  const files = (await readdir(blogDir)).filter((f) => f.endsWith('.md'));
-  if (files.length === 0) throw new Error('No posts found in src/content/blog/.');
-  const withMtime = await Promise.all(
-    files.map(async (f) => ({ f, mtime: (await stat(path.join(blogDir, f))).mtimeMs })),
-  );
-  withMtime.sort((a, b) => b.mtime - a.mtime);
-  return withMtime[0].f.replace(/\.md$/, '');
 }
 
 function insertAfterIntro(bodyLines, imageMarkdown) {
@@ -86,7 +77,7 @@ function insertInlineImage(bodyLines, suggestion, imageMarkdown) {
 async function main() {
   const { slug: slugArg } = parseArgs(process.argv.slice(2));
   const blogDir = path.join(process.cwd(), 'src', 'content', 'blog');
-  const slug = slugArg ?? (await findLatestDraftSlug(blogDir));
+  const slug = slugArg ?? (await findLatestPostSlug(blogDir));
 
   const mdPath = path.join(blogDir, `${slug}.md`);
   const sidecarPath = path.join(blogDir, `${slug}.images.json`);

@@ -5,6 +5,22 @@ QA → human approval → publish). Agents 1-4 exist; human approval and
 auto-publish are handled by hand-editing `draft: false` + `git push`
 (GitHub Actions deploys automatically) rather than a separate agent.
 
+## Running the whole thing: `npm run pipeline`
+
+```
+npm run pipeline                       # research + draft candidate 0 + images + QA
+npm run pipeline -- --index 3          # draft a different keyword candidate
+npm run pipeline -- --skip-research    # reuse the latest data/keywords/*.json
+```
+
+Runs Agents 1-4 in order for one new post, threading the slug Agent 2
+produces into Agents 3 and 4 automatically. If image generation fails it
+logs a warning and continues (a flaky free image API shouldn't block a
+draft from being reviewable); if Agent 1 or 2 fails, the pipeline stops
+there since nothing downstream has anything to work with. Ends by printing
+the post path, QA status, and the manual steps left (fill placeholders,
+verify `[SOURCE NEEDED]` claims, flip `draft: false`, commit, push).
+
 ## Agent 1 — Keyword Research
 
 ```

@@ -1,0 +1,20 @@
+{
+  "heroImageAlt": "Diagram showing a production AI agent pipeline being redirected from an older model version to GPT-5.6",
+  "imageSuggestions": [
+    {
+      "placement": "After the intro, before 'What 2.2x faster, 27% cheaper means'",
+      "concept": "A simple before/after diagram of an agent pipeline showing latency and cost metrics changing across a model swap",
+      "altText": "Before and after diagram of AI agent latency and cost metrics during a model migration"
+    },
+    {
+      "placement": "Within the migration checklist section",
+      "concept": "A checklist graphic listing the six migration steps as a visual workflow",
+      "altText": "Visual checklist of steps for migrating a production AI agent to a new model version"
+    },
+    {
+      "placement": "Near the comparison table",
+      "concept": "A simple bar chart comparing cost sources like inference speed, token pricing, and caching discounts",
+      "altText": "Bar chart comparing different sources of cost savings when upgrading an AI model version"
+    }
+  ]
+}

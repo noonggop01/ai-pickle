@@ -13,7 +13,8 @@
     "research:keywords": "node scripts/agents/keyword-research.mjs",
     "write:draft": "node scripts/agents/draft-writer.mjs",
     "make:images": "node scripts/agents/image-agent.mjs",
-    "qa:check": "node scripts/agents/qa-agent.mjs"
+    "qa:check": "node scripts/agents/qa-agent.mjs",
+    "pipeline": "node scripts/pipeline.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
