@@ -1,0 +1,15 @@
+{
+  "heroImageAlt": "Claude Code vs GitHub Copilot CLI: What Microsoft's Data Sho",
+  "imageSuggestions": [
+    {
+      "placement": "Hero image at top of article",
+      "concept": "Split-screen terminal windows showing Claude Code and GitHub Copilot CLI running side by side on the same codebase",
+      "altText": "Two terminal windows side by side comparing Claude Code and GitHub Copilot CLI output"
+    },
+    {
+      "placement": "Within the comparison table section",
+      "concept": "A simple annotated diagram showing where each tool sits relative to a typical GitHub-based dev workflow",
+      "altText": "Diagram showing GitHub Copilot CLI integrated into GitHub workflow versus Claude Code as standalone terminal agent"
+    }
+  ]
+}
