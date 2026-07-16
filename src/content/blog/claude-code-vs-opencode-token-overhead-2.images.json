@@ -1,0 +1,20 @@
+{
+  "heroImageAlt": "Split-screen visualization comparing a large token stack for Claude Code against a much smaller token stack for OpenCode before a coding prompt is processed",
+  "imageSuggestions": [
+    {
+      "placement": "After intro paragraph",
+      "concept": "Bar chart comparing ~33k token overhead vs ~7k token overhead",
+      "altText": "Bar chart showing Claude Code sending about 33,000 overhead tokens compared to OpenCode sending about 7,000"
+    },
+    {
+      "placement": "Inside the comparison table section",
+      "concept": "Diagram of a context window filling up with scaffolding tokens before user code",
+      "altText": "Diagram illustrating how much of a context window is consumed by system prompt and tool definitions before user code is added"
+    },
+    {
+      "placement": "Near the how-to-check section",
+      "concept": "Screenshot mockup of a debug log showing token counts per request",
+      "altText": "Mockup of a terminal debug log displaying token counts sent in a coding agent request"
+    }
+  ]
+}
