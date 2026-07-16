@@ -33,16 +33,41 @@ a schedule instead of by hand. The 2026 Google spam updates specifically
 targeted scaled, unreviewed AI content, which is what this gate exists to
 avoid — see the human-review step in `pipeline.mjs`'s own comments.
 
-Reviewing a generated PR: pull the branch, fill in `[EXPERIENCE: ...]`
-placeholders (or rewrite them as general-pattern statements if there's no
-first-hand experience — never fabricate an anecdote), verify `[SOURCE
-NEEDED]` claims, flip `draft: false`, push to the branch, then merge the
-PR. Merging triggers `deploy.yml` and publishes it.
+Reviewing a generated PR: edit the file directly in the PR (GitHub's web
+editor works fine from a phone), fill in `[EXPERIENCE: ...]` placeholders
+(or rewrite them as general-pattern statements if there's no first-hand
+experience — never fabricate an anecdote), verify `[SOURCE NEEDED]`
+claims, then approve via Telegram (see below) or flip `draft: false` and
+merge manually. Merging triggers `deploy.yml` and publishes it.
 
 Trigger a run manually (e.g. to test) with:
 ```
 gh workflow run daily-draft.yml --repo noonggop01/ai-pickle
 ```
+
+## Telegram approval: `.github/workflows/telegram-approve.yml`
+
+After `daily-draft.yml` opens a PR, `notify-telegram.mjs` sends a message
+with the title, category, QA summary, a count of remaining
+`[EXPERIENCE]`/`[SOURCE NEEDED]` markers, the PR link, and an
+"✅ Approve & Publish" inline button.
+
+A separate poller workflow checks Telegram every 5 minutes
+(`telegram-approve-poller.mjs`) for that button being tapped. When it is:
+1. It re-scans the PR's post file(s) for unresolved `[EXPERIENCE:` /
+   `[SOURCE NEEDED]` markers. **If any remain, it refuses to publish** and
+   replies in Telegram explaining what's still unresolved — editing still
+   has to happen in the PR itself, this is a safety check, not an editor.
+2. If clean, it flips `draft: false` if needed, commits, and merges the PR
+   (which triggers `deploy.yml`).
+3. It replies with the live URL.
+
+This needs three repo secrets: `TELEGRAM_BOT_TOKEN` (from @BotFather),
+`TELEGRAM_CHAT_ID` (the numeric chat id from a `getUpdates` call after
+messaging the bot once), and the existing `ANTHROPIC_API_KEY`. Telegram
+itself tracks which updates have been delivered per bot token — the
+poller confirms each batch it processes, so no offset/state needs to be
+stored in the repo.
 
 ## Agent 1 — Keyword Research
 
