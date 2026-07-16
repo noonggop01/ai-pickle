@@ -1,5 +1,5 @@
 ---
-title: "Claude Code vs GitHub Copilot CLI: What Microsoft's Data Sho"
+title: "Claude Code vs GitHub Copilot CLI: What Microsoft's Data"
 description: "A breakdown of Microsoft's early 2026 rollout data comparing Claude Code and GitHub Copilot CLI, and what it means for developers choosing between them."
 pubDate: 2026-07-16
 category: "AI Coding Tools"
