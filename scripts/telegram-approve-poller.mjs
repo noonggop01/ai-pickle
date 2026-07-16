@@ -83,6 +83,11 @@ async function processApproval(prNumber) {
 
   sh(`gh pr merge ${prNumber} --squash --delete-branch`);
 
+  // Pushes/merges made with the default GITHUB_TOKEN don't trigger other
+  // workflows' `on: push` (a loop-prevention rule) — deploy.yml wouldn't
+  // fire on its own, so kick it off explicitly.
+  sh('gh workflow run deploy.yml --ref master');
+
   await sendMessage(`Published! ${SITE_URL}/blog/${slug}/`);
 }
 
