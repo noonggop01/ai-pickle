@@ -22,6 +22,7 @@ pnpm-debug.log*
 
 # generated agent output (regenerated on each run)
 /data/
+src/content/blog/*.qa.json
 
 # jetbrains setting folder
 .idea/

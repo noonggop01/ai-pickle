@@ -1,7 +1,9 @@
 # Automation agents
 
 Scripts that back the content pipeline (keyword research → draft → images →
-QA → human approval → publish). Only Agent 1 exists so far.
+QA → human approval → publish). Agents 1-4 exist; human approval and
+auto-publish are handled by hand-editing `draft: false` + `git push`
+(GitHub Actions deploys automatically) rather than a separate agent.
 
 ## Agent 1 — Keyword Research
 
@@ -30,3 +32,56 @@ Each candidate matches the input shape Agent 2 (draft writer) expects:
 - `keyword` values are topic seeds (often HN story titles), not literal
   search phrases — Agent 2 is expected to turn them into an actual
   SEO-friendly title/angle, not use them verbatim.
+
+## Agent 2 — Draft Writer
+
+```
+npm run write:draft [-- --index N | --file path/to/candidate.json]
+```
+
+Requires `ANTHROPIC_API_KEY` (copy `.env.example` to `.env` and fill it in).
+Takes one candidate from the latest `data/keywords/*.json` (or a specific
+file), calls Claude with a forced tool call for reliable structured output,
+and writes `src/content/blog/<slug>.md` with `draft: true` plus a
+`<slug>.images.json` sidecar for Agent 3. Nothing is published until a
+human fills in the `[EXPERIENCE: ...]` placeholders and flips the flag.
+
+## Agent 3 — Images
+
+```
+npm run make:images [-- --slug post-slug]
+```
+
+Reads `<slug>.images.json` (falls back to hero-image-only from the title if
+it's missing), generates images via [Pollinations.ai](https://pollinations.ai)
+(free, no API key), saves them to `public/images/blog/<slug>/`, sets
+`heroImage` in the frontmatter, and inserts inline images into the body near
+their suggested placement (best-effort heading match — if it can't find a
+good spot, the image is still saved and it prints where to add it manually).
+
+Without `--slug`, it targets whichever post in `src/content/blog/` was
+modified most recently.
+
+**Known limitation:** inline image paths are written with the `/ai-pickle`
+base path baked in literally (Markdown body text isn't rewritten by Astro at
+build time the way frontmatter fields are). If the site ever moves off that
+base path, existing posts' inline images will need a find-and-replace.
+
+## Agent 4 — Automated QA
+
+```
+npm run qa:check [-- --slug post-slug | --all]
+```
+
+Runs an independent checklist against draft posts (word count, heading
+structure, banned AI-tell phrases, `[EXPERIENCE: ...]` / `[SOURCE NEEDED]`
+placeholder inventory, meta field lengths, and a title-overlap check against
+other posts) so the human reviewer only has to look at what's flagged.
+Writes a report to `<slug>.qa.json` (gitignored — cheap to regenerate,
+no network calls) and prints a pass/warn/fail summary per check.
+
+By default it checks every post still marked `draft: true`. Exits with a
+non-zero code if any post has a hard failure (banned phrase, missing
+headings, under the word-count floor, or bad meta fields) — warnings
+(like unresolved `[SOURCE NEEDED]` tags) don't block, they're just
+surfaced for review.
