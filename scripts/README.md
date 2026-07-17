@@ -53,14 +53,33 @@ with the title, category, QA summary, a count of remaining
 "✅ Approve & Publish" inline button.
 
 A separate poller workflow checks Telegram every 5 minutes
-(`telegram-approve-poller.mjs`) for that button being tapped. When it is:
-1. It re-scans the PR's post file(s) for unresolved `[EXPERIENCE:` /
+(`telegram-approve-poller.mjs`) for two kinds of replies:
+
+**Tapping "✅ 승인하고 발행" (Approve & Publish):**
+1. Re-scans the PR's post file(s) for unresolved `[EXPERIENCE:` /
    `[SOURCE NEEDED]` markers. **If any remain, it refuses to publish** and
-   replies in Telegram explaining what's still unresolved — editing still
-   has to happen in the PR itself, this is a safety check, not an editor.
-2. If clean, it flips `draft: false` if needed, commits, and merges the PR
+   replies explaining what's still unresolved.
+2. If clean, flips `draft: false` if needed, commits, and merges the PR
    (which triggers `deploy.yml`).
-3. It replies with the live URL.
+3. Replies with the live URL.
+
+**Replying with plain text (Korean notes):** since re-typing everything in
+English is real friction for a non-native-English author, you can just
+reply to the bot in Korean with whatever you know about the flagged
+`[EXPERIENCE: ...]` spots — no translating back and forth required.
+`lib/localize.mjs` sends your notes + the placeholders (plus any
+`[SOURCE NEEDED]` lines) to Claude, which:
+- matches your notes to the relevant placeholder and writes a natural
+  English sentence integrating that real information (falls back to
+  general framing for any placeholder your notes don't cover — it won't
+  invent a specific claim you didn't make)
+- rewrites each `[SOURCE NEEDED]` line with full-sentence context so
+  removing the tag doesn't leave a dangling fragment (a plain regex strip
+  broke this when the tag was the first word of a sentence)
+
+The updated file gets pushed to the PR branch automatically, and the bot
+replies with the live Approve button once nothing's left unresolved. You
+can keep replying with more notes if some placeholders are still open.
 
 This needs three repo secrets: `TELEGRAM_BOT_TOKEN` (from @BotFather),
 `TELEGRAM_CHAT_ID` (the numeric chat id from a `getUpdates` call after
