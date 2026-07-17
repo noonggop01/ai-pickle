@@ -77,6 +77,31 @@ main { padding: 2.5rem 0 3rem; }
   border-bottom: 1px solid var(--color-border);
 }
 
+.post-list-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.post-thumb-link {
+  flex: none;
+}
+
+.post-thumb {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+@media (max-width: 480px) {
+  .post-thumb {
+    width: 64px;
+    height: 64px;
+  }
+}
+
 .post-list h2 { margin: 0 0 0.35rem; font-size: 1.2rem; }
 .post-list h2 a { color: var(--color-text); text-decoration: none; }
 .post-list h2 a:hover { color: var(--color-accent); }

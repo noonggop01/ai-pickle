@@ -4,32 +4,35 @@ import { SITE } from '../site.config';
 import { withBase } from '../lib/url';
 
 const title = 'About';
-const description = `About ${SITE.name} — who we are and how we test the AI tools we review.`;
+const description = `About ${SITE.name} — who writes it and how each post gets made.`;
 ---
 
 <BaseLayout title={title} description={description}>
   <h1>About {SITE.name}</h1>
 
   <p>
-    {SITE.name} publishes hands-on reviews and comparisons of AI writing, image, video,
-    and productivity tools. We focus on practical questions readers actually have —
-    which tool is worth paying for, how tools compare on real tasks, and where the
-    free tiers fall short — rather than rewriting press releases.
+    Hi, I'm {SITE.author}. {SITE.name} is where I break down AI writing, coding, image,
+    and productivity tools — what they actually do, how they compare, and where the
+    marketing oversells them. I focus on the questions I'd actually want answered before
+    spending money or time on a tool, not on rewriting press releases.
   </p>
 
-  <h2>How we work</h2>
+  <h2>How posts get made</h2>
   <p>
-    Drafts are researched and written with AI assistance, then reviewed and edited by
-    a human before publishing. Every review is checked for accuracy and updated when
-    a tool changes significantly. We do not accept payment in exchange for a positive
-    review.
+    Drafts start as AI-assisted research and writing, then I personally review and edit
+    every post before it goes up — checking claims, cutting anything that doesn't hold
+    up, and adding real context where I have it. I'm upfront that not every post reflects
+    hands-on testing of every tool covered yet; where a claim is genuinely from my own use,
+    it reads that way, and where it's drawn from public information or reporting, I try to
+    keep the framing honest about that rather than implying first-hand experience I don't
+    have. I'm not paid for positive coverage.
   </p>
 
   <h2>Advertising</h2>
   <p>
     This site is supported by display advertising (including Google AdSense) and may,
     in the future, include affiliate links clearly marked as such. Advertising and
-    affiliate relationships never determine our conclusions.
+    affiliate relationships never determine my conclusions.
   </p>
 
   <h2>Contact</h2>

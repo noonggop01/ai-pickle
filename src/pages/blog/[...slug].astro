@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { withBase } from '../../lib/url';
+import { SITE } from '../../site.config';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
@@ -22,7 +23,7 @@ const heroImageSrc = post.data.heroImage ? withBase(post.data.heroImage) : undef
   <article class="post">
     <h1>{post.data.title}</h1>
     <p class="post-meta">
-      {dateFormatter.format(post.data.pubDate)}
+      By {SITE.author} &middot; {dateFormatter.format(post.data.pubDate)}
       {post.data.updatedDate && ` (updated ${dateFormatter.format(post.data.updatedDate)})`}
       &middot; {post.data.category}
     </p>
