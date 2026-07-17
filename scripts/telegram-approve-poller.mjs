@@ -108,6 +108,11 @@ async function processLocalizeNotes(koreanNotes) {
     await sendMessage('지금 열려있는 초안 PR이 없어요. 새 초안이 오면 다시 답장해주세요.');
     return;
   }
+  if (openPRs.length > 1) {
+    const list = openPRs.map((p) => `#${p.number}: ${p.url}`).join('\n');
+    await sendMessage(`열려있는 초안 PR이 ${openPRs.length}개라 어디에 반영할지 애매해요. 하나씩 정리해주세요:\n${list}`);
+    return;
+  }
   const pr = openPRs[0];
 
   checkoutPrBranch(pr.headRefName);

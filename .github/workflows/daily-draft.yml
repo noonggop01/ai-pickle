@@ -24,19 +24,49 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Check for an already-open draft PR
+        id: check-existing
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          EXISTING_URL=$(gh pr list --state open --json url,headRefName --jq '[.[] | select(.headRefName | startswith("draft/"))][0].url // empty')
+          if [ -n "$EXISTING_URL" ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "url=$EXISTING_URL" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      # Only one draft PR pending review at a time — piling up a second one
+      # while the first is unreviewed is exactly what caused a Telegram
+      # reply meant for PR A to get misapplied to PR B (there was no
+      # reliable way to tell which PR a plain-text reply was about).
+      - name: Remind about the pending PR instead
+        if: steps.check-existing.outputs.exists == 'true'
+        run: |
+          node -e "import('./scripts/lib/telegram.mjs').then(({sendMessage}) => sendMessage('아직 검토 안 된 초안이 남아있어서 오늘은 새로 안 만들었어요. 먼저 처리해주세요: ${{ steps.check-existing.outputs.url }}'))"
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
       - uses: actions/setup-node@v4
+        if: steps.check-existing.outputs.exists == 'false'
         with:
           node-version: 22
           cache: npm
       - run: npm ci
+        if: steps.check-existing.outputs.exists == 'false'
 
       - name: Run Agents 1-4
+        if: steps.check-existing.outputs.exists == 'false'
         run: npm run pipeline -- --index "${{ github.event.inputs.index || '0' }}"
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
       - name: Open a review PR if a draft was generated
         id: open-pr
+        if: steps.check-existing.outputs.exists == 'false'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
