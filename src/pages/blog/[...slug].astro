@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { withBase } from '../../lib/url';
 import { SITE } from '../../site.config';
+import { categorySlug } from '../../lib/category';
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => !data.draft);
@@ -25,7 +26,7 @@ const heroImageSrc = post.data.heroImage ? withBase(post.data.heroImage) : undef
     <p class="post-meta">
       By {SITE.author} &middot; {dateFormatter.format(post.data.pubDate)}
       {post.data.updatedDate && ` (updated ${dateFormatter.format(post.data.updatedDate)})`}
-      &middot; {post.data.category}
+      &middot; <a href={withBase(`/category/${categorySlug(post.data.category)}/`)}>{post.data.category}</a>
     </p>
     {heroImageSrc && <img src={heroImageSrc} alt={post.data.heroImageAlt ?? ''} />}
     <Content />

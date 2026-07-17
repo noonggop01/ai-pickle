@@ -1,0 +1,36 @@
+---
+import { SITE } from '../site.config';
+import { withBase } from '../lib/url';
+import { categorySlug } from '../lib/category';
+
+interface Props {
+  posts: any[];
+}
+
+const { posts } = Astro.props;
+const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+---
+
+{posts.length === 0 ? (
+  <p>No posts yet — check back soon.</p>
+) : (
+  <ul class="post-list">
+    {posts.map((post) => (
+      <li class="post-list-item">
+        {post.data.heroImage && (
+          <a href={withBase(`/blog/${post.id}/`)} class="post-thumb-link" tabindex="-1" aria-hidden="true">
+            <img class="post-thumb" src={withBase(post.data.heroImage)} alt="" loading="lazy" />
+          </a>
+        )}
+        <div>
+          <h2><a href={withBase(`/blog/${post.id}/`)}>{post.data.title}</a></h2>
+          <p class="post-meta">
+            By {SITE.author} &middot; {dateFormatter.format(post.data.pubDate)} &middot;{' '}
+            <a href={withBase(`/category/${categorySlug(post.data.category)}/`)}>{post.data.category}</a>
+          </p>
+          <p>{post.data.description}</p>
+        </div>
+      </li>
+    ))}
+  </ul>
+)}

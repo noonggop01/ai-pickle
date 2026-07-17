@@ -2,35 +2,13 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE } from '../site.config';
-import { withBase } from '../lib/url';
+import PostList from '../components/PostList.astro';
 
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
-const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 
 <BaseLayout title={SITE.name} description={SITE.description}>
   <p class="post-meta">{SITE.tagline}</p>
-
-  {posts.length === 0 ? (
-    <p>No posts yet — check back soon.</p>
-  ) : (
-    <ul class="post-list">
-      {posts.map((post) => (
-        <li class="post-list-item">
-          {post.data.heroImage && (
-            <a href={withBase(`/blog/${post.id}/`)} class="post-thumb-link" tabindex="-1" aria-hidden="true">
-              <img class="post-thumb" src={withBase(post.data.heroImage)} alt="" loading="lazy" />
-            </a>
-          )}
-          <div>
-            <h2><a href={withBase(`/blog/${post.id}/`)}>{post.data.title}</a></h2>
-            <p class="post-meta">By {SITE.author} &middot; {dateFormatter.format(post.data.pubDate)} &middot; {post.data.category}</p>
-            <p>{post.data.description}</p>
-          </div>
-        </li>
-      ))}
-    </ul>
-  )}
+  <PostList posts={posts} />
 </BaseLayout>
