@@ -1,0 +1,20 @@
+{
+  "heroImageAlt": "Split-screen graphic showing the old NotebookLM logo transitioning into the new Gemini Notebook branding",
+  "imageSuggestions": [
+    {
+      "placement": "After intro, before 'Why Google renamed it'",
+      "concept": "Side-by-side logo comparison of NotebookLM and Gemini Notebook branding",
+      "altText": "NotebookLM logo next to the new Gemini Notebook logo showing the rebrand"
+    },
+    {
+      "placement": "Within 'What actually changed vs what's just cosmetic' section",
+      "concept": "Screenshot-style mockup of the Gemini Notebook interface with source panel and chat",
+      "altText": "Mockup of Gemini Notebook interface showing uploaded sources and grounded chat responses"
+    },
+    {
+      "placement": "Within 'How Gemini Notebook stacks up against alternatives' section",
+      "concept": "Simple comparison chart icon graphic representing tool comparison",
+      "altText": "Icon-based comparison graphic representing AI research tool alternatives"
+    }
+  ]
+}
