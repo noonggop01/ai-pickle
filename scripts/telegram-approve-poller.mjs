@@ -21,7 +21,15 @@ import { localizePlaceholders } from './lib/localize.mjs';
 const SITE_URL = 'https://noonggop01.github.io/ai-pickle';
 
 function sh(cmd) {
-  return execSync(cmd, { encoding: 'utf-8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
+  try {
+    return execSync(cmd, { encoding: 'utf-8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
+  } catch (err) {
+    // execSync's default error message ("Command failed: ...") doesn't
+    // include the actual stderr — without this, failures show up in
+    // Telegram as a useless generic message.
+    const detail = (err.stderr || err.stdout || '').toString().trim();
+    throw new Error(detail ? `${cmd}\n${detail}` : err.message);
+  }
 }
 
 function findUnresolvedMarkers(text) {

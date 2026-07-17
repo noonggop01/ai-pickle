@@ -7,7 +7,7 @@ tags: ["Gemini Notebook","NotebookLM","Google Gemini","AI research tools","note-
 heroImageAlt: "Split-screen graphic showing the old NotebookLM logo transitioning into the new Gemini Notebook branding"
 sourceUrl: "https://blog.google/innovation-and-ai/products/gemini-notebook/notebooklm-gemini-notebook/"
 heroImage: "/images/blog/notebooklm-is-now-gemini-notebook/hero.jpg"
-draft: true
+draft: false
 ---
 Google just renamed one of its most-loved AI products, and the internet did what it always does when a beloved tool gets a new name: panicked a little. NotebookLM — the source-grounded research and note-taking tool that built a genuinely devoted fanbase — is now Gemini Notebook. Same core idea, new badge, and a handful of changes worth understanding before you assume nothing important shifted.
 
