@@ -111,6 +111,9 @@ async function main() {
     const heroFilename = `hero.${extension}`;
     await writeFile(path.join(outDir, heroFilename), buffer);
     setFrontmatterField(frontmatterLines, 'heroImage', JSON.stringify(`/images/blog/${slug}/${heroFilename}`));
+    if (!getFrontmatterField(frontmatterLines, 'heroImageAlt')) {
+      setFrontmatterField(frontmatterLines, 'heroImageAlt', JSON.stringify(sidecar.heroImageAlt || heroImageAlt));
+    }
     console.error(`Saved public/images/blog/${slug}/${heroFilename}`);
   }
 

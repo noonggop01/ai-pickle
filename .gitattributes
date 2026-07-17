@@ -1,0 +1,4 @@
+# Force LF line endings regardless of platform. Our Node scripts (frontmatter
+# parsing in particular) assume LF and break on CRLF, which Windows git
+# checkouts introduce by default without this.
+* text=auto eol=lf
