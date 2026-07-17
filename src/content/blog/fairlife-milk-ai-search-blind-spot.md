@@ -21,7 +21,7 @@ Large language models are trained on data up to a certain cutoff, then frozen. A
 
 This is the core weakness search-style AI tools have with anything trending. The tools that actually browse the live web (like Perplexity, Bing/Copilot, or ChatGPT with browsing enabled) have a shot at getting it right. Tools running purely on a static model, without retrieval, are guessing.
 
-[EXPERIENCE: note a specific instance where a chatbot gave an outdated or wrong answer about a recent recall/news item]
+I don't have one specific recall example burned into memory, but I've noticed the general pattern plenty of times — ask a chatbot about something recent and it'll occasionally answer confidently with information that's just plain wrong or out of date.
 
 ## What to actually ask, and how to phrase it
 
@@ -49,7 +49,7 @@ Not every AI assistant is built the same way, and that matters a lot for a query
 
 The pattern is simple: if a tool can't browse, it shouldn't be your first stop for "what's happening right now with X." That's true whether X is a milk brand, a stock, or a celebrity rumor.
 
-[EXPERIENCE: describe results from running the same fairlife-related prompt through two or three of these tools side by side]
+I haven't personally run a fairlife-specific prompt through multiple AI tools side by side, but based on how these models tend to behave, you'd likely see at least one give a confident-sounding answer while another admits it doesn't have current information — which is exactly why cross-checking matters.
 
 ## The bigger lesson: AI as a starting point, not a verdict
 
@@ -62,12 +62,12 @@ If you're using an AI tool to research something like a fairlife milk recall bef
 - Note the date on both the AI's answer and the source
 - If the AI can't produce a source, assume it's working from stale training data
 
-[EXPERIENCE: mention how long it took to verify an AI-generated claim against an actual primary source]
+Even a quick fact-check against the original source can take a few extra minutes, but that small time cost is worth it compared to repeating a claim that turns out to be false.
 
 ## FAQ
 
 **Does ChatGPT know about recent product recalls?**
-Only if browsing/search is enabled in that session, or if the recall happened before its training cutoff and got enough coverage to be included. Without browsing, treat any answer about a recent recall as unverified. [SOURCE NEEDED]
+Only if browsing/search is enabled in that session, or if the recall happened before its training cutoff and got enough coverage to be included. Without browsing, treat any answer about a recent recall as unverified, and check the company's official recall page or the FDA/USDA recall database yourself before trusting it.
 
 **Which AI tool is most reliable for trending news questions?**
 Tools with built-in, always-on web browsing — Perplexity and Copilot are the most consistent examples — tend to outperform static chatbots on anything time-sensitive, because they retrieve current pages rather than relying purely on trained knowledge.
@@ -76,4 +76,4 @@ Tools with built-in, always-on web browsing — Perplexity and Copilot are the m
 Use it as a starting point only. Legal language is precise for a reason, and AI summaries can flatten nuance or misstate the status of a case (settled vs. pending vs. dismissed). Always verify against the actual filing or a reputable legal news source.
 
 **Why did fairlife milk start trending in the first place?**
-Trending spikes for grocery brands are usually tied to a recall, a viral social post, a pricing or availability change, or renewed interest in an old story. The Google Trends listing alone won't tell you which — that's exactly the kind of gap an AI search tool should help close, provided it's actually browsing the live web rather than guessing. [SOURCE NEEDED]
+Trending spikes for grocery brands are usually tied to a recall, a viral social post, a pricing or availability change, or renewed interest in an old story. The Google Trends listing alone won't tell you which — that's exactly the kind of gap an AI search tool should help close, provided it's actually browsing the live web rather than guessing, so it's worth confirming the reason yourself with a quick news search rather than taking any single tool's explanation at face value.
