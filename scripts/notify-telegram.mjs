@@ -8,6 +8,8 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { splitFrontmatter, getFrontmatterField } from './lib/frontmatter.mjs';
 import { sendMessage } from './lib/telegram.mjs';
+import { translateHintsToKorean } from './lib/localize.mjs';
+import { loadDotEnv } from './lib/env.mjs';
 
 function parseArgs(argv) {
   const args = {};
@@ -20,6 +22,7 @@ function parseArgs(argv) {
 }
 
 async function main() {
+  await loadDotEnv();
   const { slug, pr, prUrl } = parseArgs(process.argv.slice(2));
   if (!slug || !pr || !prUrl) throw new Error('Usage: --slug <slug> --pr <number> --pr-url <url>');
 
@@ -30,8 +33,9 @@ async function main() {
   const description = getFrontmatterField(frontmatterLines, 'description') ?? '';
   const category = getFrontmatterField(frontmatterLines, 'category') ?? '';
 
-  const experienceHints = [...body.matchAll(/\[EXPERIENCE:([^\]]*)\]/g)].map((m) => m[1].trim());
+  const experienceHintsEn = [...body.matchAll(/\[EXPERIENCE:([^\]]*)\]/g)].map((m) => m[1].trim());
   const sourceNeededCount = [...body.matchAll(/\[SOURCE NEEDED\]/g)].length;
+  const experienceHints = await translateHintsToKorean(experienceHintsEn);
 
   let qaLine = '';
   try {

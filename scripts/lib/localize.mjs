@@ -81,3 +81,31 @@ export async function localizePlaceholders(bodyMarkdown, koreanNotes) {
 
   return { bodyMarkdown: updated, filledCount };
 }
+
+const TRANSLATE_TOOL = {
+  name: 'submit_translations',
+  description: 'Submit a Korean translation for each hint, in the same order given.',
+  input_schema: {
+    type: 'object',
+    properties: {
+      translations: { type: 'array', items: { type: 'string' } },
+    },
+    required: ['translations'],
+  },
+};
+
+// Translates Agent 2's English placeholder hints to Korean for display in
+// the Telegram notification — the draft itself stays English, this is
+// purely so the author can read what's being asked without another
+// round-trip through a translator.
+export async function translateHintsToKorean(hints) {
+  if (hints.length === 0) return [];
+
+  const result = await callClaudeForStructuredOutput({
+    system: 'Translate each English hint into a short, natural Korean question or prompt that a Korean-speaking blog author would understand at a glance. One short sentence per hint. Return translations in the same order as the hints.',
+    userMessage: JSON.stringify({ hints }),
+    tool: TRANSLATE_TOOL,
+  });
+
+  return result.translations?.length === hints.length ? result.translations : hints;
+}
