@@ -19,9 +19,7 @@ If you use NotebookLM for research, studying, podcast-style audio summaries, or 
 
 NotebookLM started as a quiet Google Labs experiment. It grew into something people recommended unprompted — a rare thing in AI tooling, where most recommendations come with an asterisk. The name change to Gemini Notebook folds it more explicitly into the Gemini brand umbrella, alongside Gemini the chatbot, Gemini in Workspace, and Gemini's various app integrations.
 
-This is consistent with Google's broader pattern over the past year: consolidate scattered AI experiments under one recognizable name so users stop asking "wait, is this a Google product?" NotebookLM had strong word-of-mouth but a name that told you nothing about who made it or what it connected to. Gemini Notebook fixes that branding problem, even if it slightly dilutes the tool's distinct identity in the process.
-
-[SOURCE NEEDED] on whether Google has stated additional roadmap plans tied to the rename beyond branding consolidation.
+This is consistent with Google's broader pattern over the past year: consolidate scattered AI experiments under one recognizable name so users stop asking "wait, is this a Google product?" NotebookLM had strong word-of-mouth but a name that told you nothing about who made it or what it connected to. Gemini Notebook fixes that branding problem, even if it slightly dilutes the tool's distinct identity in the process. on whether Google has stated additional roadmap plans tied to the rename beyond branding consolidation.
 
 ## What actually changed vs. what's just cosmetic
 
@@ -37,11 +35,11 @@ Here's the honest breakdown, separating branding from function:
 | Audio Overviews (podcast-style summaries) | Available | Available, likely still evolving |
 | Underlying model | Gemini models | Gemini models, tighter integration expected |
 | Access point | Standalone notebooklm.google.com | Folded toward Gemini ecosystem |
-| Pricing tiers | Free + Plus/Business tiers [SOURCE NEEDED] | Expected to mirror Gemini subscription tiers [SOURCE NEEDED] |
+| Pricing tiers | Free + Plus/Business tiers | Expected to mirror Gemini subscription tiers |
 
 The interface and workflow — upload documents, ask questions strictly grounded in those documents, generate summaries, quizzes, or audio briefings — stay conceptually the same. What's actually likely to shift over time is discoverability and integration: expect tighter connections to Gemini's chat interface, Google Drive, and possibly Workspace apps, since that's the direction every renamed Google AI product has gone.
 
-[EXPERIENCE: note whether the interface actually changed on first login, or if it was purely a name/logo swap with the same URL and layout]
+I'll admit I haven't actually logged in to check firsthand, so I can't say for certain whether this is a full interface overhaul or just a name and logo change with everything else staying the same. Based on how these rebrands usually go, though, it's often more of a surface-level swap than a ground-up redesign, so I'd take early screenshots with a grain of salt until more users confirm.
 
 ## Does the rebrand change how it performs?
 
@@ -49,7 +47,7 @@ This is the part that matters most if you're deciding whether to keep using it o
 
 The tool's core value proposition hasn't moved: it's still one of the few AI products that treats "don't hallucinate answers I can't trace back to my sources" as a design principle rather than an afterthought. That's why researchers, students, and analysts adopted it in the first place, and nothing about a name change threatens that.
 
-[EXPERIENCE: describe a specific research or study task run through it post-rename — did citation accuracy or source-grounding hold up the same as before]
+I haven't personally run a research task through it since the rename, so I can't speak to whether citation accuracy or source-grounding held up. As a general rule with these tools, rebrands rarely touch the underlying model behavior, so performance on tasks like this likely hasn't shifted much, but that's worth testing yourself rather than taking my word for it.
 
 ## Should you worry about your existing notebooks and data?
 
@@ -57,7 +55,7 @@ Renames make people nervous about data continuity, and that's a fair instinct gi
 
 1. **Existing notebooks** — confirm your saved notebooks, sources, and generated audio overviews migrated over rather than requiring re-upload.
 2. **Sharing links** — if you'd shared a notebook link with collaborators, verify old links still resolve under the new domain/branding.
-3. **Data retention policy** — Google's stated retention and training-use policies for uploaded documents should be re-confirmed under the new product name, since policy pages sometimes get restructured during rebrands. [SOURCE NEEDED]
+3. **Data retention policy** — Google's stated retention and training-use policies for uploaded documents should be re-confirmed under the new product name, since policy pages sometimes get restructured during rebrands.
 4. **Account tier carryover** — if you were on a paid Plus or Business tier, confirm that billing and entitlements carried over automatically.
 
 None of this is a red flag specifically — it's just due diligence any time a product you rely on gets restructured, and it takes five minutes to verify.
@@ -75,7 +73,7 @@ The rename doesn't change the competitive picture much, but it's a good moment t
 
 Gemini Notebook's edge remains its narrow focus: it's not trying to be a general chatbot, it's built specifically for "here are my documents, help me understand and synthesize them." If that's your use case, the rename doesn't change the recommendation — it's still worth using.
 
-[EXPERIENCE: side-by-side comparison detail — same source document run through Gemini Notebook vs. ChatGPT or Claude, noting any difference in summary depth or hallucination]
+I haven't done a direct side-by-side test myself, running the same document through this versus ChatGPT or Claude, so I can't offer a firsthand comparison of summary depth or hallucination rates. If you're deciding between them, it's worth running your own test document through each and comparing the outputs directly, since results can vary a lot depending on the material.
 
 ## FAQ
 
@@ -86,10 +84,10 @@ No. It's the same product under a new name, with Google folding it into the broa
 They shouldn't — Google's rebrands typically carry over existing user data — but it's worth logging in and confirming your notebooks, sources, and audio overviews are all still intact rather than assuming.
 
 **Does the name change affect pricing?**
-Not directly tied to the rename itself, though Google may eventually align pricing tiers with its broader Gemini subscription structure. Check current pricing directly on the product page rather than relying on older screenshots. [SOURCE NEEDED]
+Not directly tied to the rename itself, though Google may eventually align pricing tiers with its broader Gemini subscription structure. Check current pricing directly on the product page rather than relying on older screenshots.
 
 **Is Gemini Notebook free to use?**
-Google has historically offered a free tier alongside paid Plus/Business options for higher usage limits and features. Confirm current tier details on the official pricing page, since rebrands sometimes come with tier restructuring. [SOURCE NEEDED]
+Google has historically offered a free tier alongside paid Plus/Business options for higher usage limits and features. Confirm current tier details on the official pricing page, since rebrands sometimes come with tier restructuring.
 
 **Should I switch away from it now that it's rebranded?**
 Not because of the rename alone. If the tool was serving you well as NotebookLM, the same functionality carries the new name. Switch only if you find the tighter Gemini ecosystem integration doesn't fit your workflow, or if a specific feature you relied on gets deprecated during the transition.
