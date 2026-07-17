@@ -6,6 +6,7 @@
 
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { splitFrontmatter, getFrontmatterField } from './lib/frontmatter.mjs';
 import { sendMessage } from './lib/telegram.mjs';
 import { translateHintsToKorean } from './lib/localize.mjs';
@@ -82,7 +83,9 @@ async function main() {
   console.log(`Telegram notification sent for PR #${pr}.`);
 }
 
-main().catch((err) => {
-  console.error('Telegram notification failed:', err.message);
-  process.exit(1);
-});
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch((err) => {
+    console.error('Telegram notification failed:', err.message);
+    process.exit(1);
+  });
+}

@@ -13,6 +13,7 @@
 
 import { execSync } from 'node:child_process';
 import { readFile, writeFile } from 'node:fs/promises';
+import { pathToFileURL } from 'node:url';
 import { getUpdates, confirmUpdatesThrough, answerCallbackQuery, sendMessage } from './lib/telegram.mjs';
 import { splitFrontmatter, setFrontmatterField, joinFrontmatter } from './lib/frontmatter.mjs';
 import { localizePlaceholders } from './lib/localize.mjs';
@@ -27,6 +28,22 @@ function findUnresolvedMarkers(text) {
   const experience = [...text.matchAll(/\[EXPERIENCE:[^\]]*\]/g)].length;
   const sourceNeeded = [...text.matchAll(/\[SOURCE NEEDED\]/g)].length;
   return experience + sourceNeeded;
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// GitHub computes mergeability asynchronously after a push — attempting a
+// merge immediately can fail with "not mergeable" even though it settles to
+// mergeable a few seconds later. Poll briefly before giving up.
+async function waitForMergeable(prNumber, attempts = 6, delayMs = 5000) {
+  for (let i = 0; i < attempts; i++) {
+    const state = sh(`gh pr view ${prNumber} --json mergeable --jq .mergeable`);
+    if (state !== 'UNKNOWN') return state;
+    await sleep(delayMs);
+  }
+  return 'UNKNOWN';
 }
 
 function checkoutPrBranch(headRefName) {
@@ -92,7 +109,18 @@ async function processApproval(prNumber) {
     sh(`git push origin ${pr.headRefName}`);
   }
 
-  sh(`gh pr merge ${prNumber} --squash --delete-branch`);
+  const mergeable = await waitForMergeable(prNumber);
+  if (mergeable === 'CONFLICTING') {
+    await sendMessage(`PR #${prNumber}에 충돌이 있어서 자동 머지가 안 돼요 — 직접 확인해주세요: ${pr.url}`);
+    return;
+  }
+
+  try {
+    sh(`gh pr merge ${prNumber} --squash --delete-branch`);
+  } catch (err) {
+    await sendMessage(`PR #${prNumber} 머지에 실패했어요 (${mergeable === 'UNKNOWN' ? 'GitHub가 아직 머지 가능 여부를 계산 중일 수 있어요, 잠시 후 다시 승인해주세요' : err.message}): ${pr.url}`);
+    return;
+  }
 
   // Pushes/merges made with the default GITHUB_TOKEN don't trigger other
   // workflows' `on: push` (a loop-prevention rule) — deploy.yml wouldn't
@@ -188,7 +216,9 @@ async function main() {
   await confirmUpdatesThrough(maxUpdateId);
 }
 
-main().catch((err) => {
-  console.error('Telegram approve poller failed:', err.message);
-  process.exit(1);
-});
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch((err) => {
+    console.error('Telegram approve poller failed:', err.message);
+    process.exit(1);
+  });
+}
