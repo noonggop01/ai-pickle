@@ -1,0 +1,15 @@
+{
+  "heroImageAlt": "Claude Code vs OpenCode: Why Token Overhead Matters",
+  "imageSuggestions": [
+    {
+      "placement": "After intro, before first H2",
+      "concept": "Side-by-side bar chart visual showing 33k vs 7k token overhead",
+      "altText": "Bar chart comparing Claude Code and OpenCode token overhead before a prompt is processed"
+    },
+    {
+      "placement": "Within the comparison table section",
+      "concept": "Screenshot-style mockup of a terminal running a coding agent with token usage stats visible",
+      "altText": "Terminal window showing an AI coding agent displaying token usage statistics"
+    }
+  ]
+}
