@@ -4,6 +4,8 @@ description: "A hands-on comparison of Claude and ChatGPT for long-form writing,
 pubDate: 2026-07-16
 category: "AI Writing Tools"
 tags: ["claude", "chatgpt", "ai writing", "comparison"]
+heroImage: "/images/blog/claude-vs-chatgpt-for-writing-2026/hero.jpg"
+heroImageAlt: "Claude vs. ChatGPT for Writing in 2026"
 draft: false
 ---
 
