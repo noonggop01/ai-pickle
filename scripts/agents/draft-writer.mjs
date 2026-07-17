@@ -159,6 +159,7 @@ async function main() {
     `category: ${yamlString(draft.category)}`,
     `tags: ${JSON.stringify(draft.tags ?? [])}`,
     draft.heroImageAlt ? `heroImageAlt: ${yamlString(draft.heroImageAlt)}` : null,
+    candidate.reference_url ? `sourceUrl: ${yamlString(candidate.reference_url)}` : null,
     'draft: true',
     '---',
     '',

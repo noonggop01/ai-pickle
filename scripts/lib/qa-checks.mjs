@@ -2,17 +2,13 @@
 // where status is 'pass' | 'warn' | 'fail'. Kept independent of Agent 2's
 // prompt so this is a real second opinion, not just re-reading the same rules.
 
+import { textOverlap, significantWords } from './similarity.mjs';
+
 const BANNED_PHRASES = [
   'delve into', "in today's fast-paced world", 'moreover', 'furthermore',
   "it's important to note", 'unlock the power of', 'in conclusion',
   'game-changer', 'in the ever-evolving landscape',
 ];
-
-const STOPWORDS = new Set([
-  'the', 'a', 'an', 'and', 'or', 'but', 'for', 'to', 'of', 'in', 'on', 'at',
-  'is', 'are', 'was', 'were', 'be', 'been', 'with', 'that', 'this', 'it',
-  'your', 'you', 'what', 'how', 'why', 'vs', 'ai',
-]);
 
 function countWords(markdown) {
   const stripped = markdown
@@ -112,20 +108,14 @@ export function checkMetaFields(data) {
   return { name: 'meta_fields', status: 'pass', message: 'Title, description, and tags are within limits.' };
 }
 
-function significantWords(text) {
-  return (text.toLowerCase().match(/[a-z0-9]+/g) ?? []).filter((w) => w.length > 2 && !STOPWORDS.has(w));
-}
-
 export function checkDuplicateTopic(data, otherPosts) {
-  const words = new Set(significantWords(data.title ?? ''));
-  if (words.size === 0) return { name: 'duplicate_topic', status: 'pass', message: 'No title to compare.' };
+  if (significantWords(data.title ?? '').length === 0) {
+    return { name: 'duplicate_topic', status: 'pass', message: 'No title to compare.' };
+  }
 
   let best = { slug: null, overlap: 0 };
   for (const other of otherPosts) {
-    const otherWords = new Set(significantWords(other.data?.title ?? ''));
-    if (otherWords.size === 0) continue;
-    const intersection = [...words].filter((w) => otherWords.has(w)).length;
-    const overlap = intersection / Math.min(words.size, otherWords.size);
+    const overlap = textOverlap(data.title, other.data?.title);
     if (overlap > best.overlap) best = { slug: other.slug, overlap };
   }
 
