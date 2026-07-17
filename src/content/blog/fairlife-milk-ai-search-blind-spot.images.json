@@ -1,0 +1,15 @@
+{
+  "heroImageAlt": "Why \"Fairlife Milk\" Trends Reveal AI Search's Blind Spot",
+  "imageSuggestions": [
+    {
+      "placement": "Top of article, after intro",
+      "concept": "Split-screen graphic showing a grocery dairy aisle on one side and a chatbot interface with a 'browsing' indicator on the other",
+      "altText": "Split image of a milk carton on a grocery shelf next to an AI chatbot search interface"
+    },
+    {
+      "placement": "Within the comparison table section",
+      "concept": "Simple icon grid comparing browsing-enabled vs static AI tools",
+      "altText": "Icon comparison chart showing which AI assistants have live web browsing versus static training data"
+    }
+  ]
+}
