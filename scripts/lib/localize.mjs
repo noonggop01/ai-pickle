@@ -84,11 +84,21 @@ export async function localizePlaceholders(bodyMarkdown, koreanNotes) {
 
 const TRANSLATE_TOOL = {
   name: 'submit_translations',
-  description: 'Submit a Korean translation for each hint, in the same order given.',
+  description: 'Submit a Korean translation for each hint.',
   input_schema: {
     type: 'object',
     properties: {
-      translations: { type: 'array', items: { type: 'string' } },
+      translations: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            original: { type: 'string', description: 'Exact original English hint text, verbatim.' },
+            korean: { type: 'string', description: 'Natural Korean translation of that hint.' },
+          },
+          required: ['original', 'korean'],
+        },
+      },
     },
     required: ['translations'],
   },
@@ -98,14 +108,21 @@ const TRANSLATE_TOOL = {
 // the Telegram notification — the draft itself stays English, this is
 // purely so the author can read what's being asked without another
 // round-trip through a translator.
+//
+// Matches by exact original text rather than array position/length: an
+// earlier position-based version silently fell back to ALL-English
+// whenever the model's output array length didn't exactly match the input
+// (which happens more often than you'd expect), with no visible error.
+// Matching per-hint means one mistranslation doesn't take the rest with it.
 export async function translateHintsToKorean(hints) {
   if (hints.length === 0) return [];
 
   const result = await callClaudeForStructuredOutput({
-    system: 'Translate each English hint into a short, natural Korean question or prompt that a Korean-speaking blog author would understand at a glance. One short sentence per hint. Return translations in the same order as the hints.',
+    system: 'Translate each English hint into a short, natural Korean question or prompt that a Korean-speaking blog author would understand at a glance. One short sentence per hint.',
     userMessage: JSON.stringify({ hints }),
     tool: TRANSLATE_TOOL,
   });
 
-  return result.translations?.length === hints.length ? result.translations : hints;
+  const byOriginal = new Map((result.translations ?? []).map((t) => [t.original, t.korean]));
+  return hints.map((h) => byOriginal.get(h) ?? h);
 }
