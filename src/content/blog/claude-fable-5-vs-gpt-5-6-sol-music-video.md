@@ -7,7 +7,7 @@ tags: ["AI music video","Claude Fable 5","GPT-5.6 Sol","AI video generation","AI
 sourceUrl: "https://www.tryai.dev/blog/ai-music-video-arena-claude-vs-gpt-5.6"
 heroImage: "/images/blog/claude-fable-5-vs-gpt-5-6-sol-music-video/hero.jpg"
 heroImageAlt: "$100 AI Music Video Test: Claude Fable 5 vs GPT-5.6 Sol"
-draft: true
+draft: false
 ---
 A $100 budget for an AI-made music video sounds like a fun stunt until you actually try to spend it. Split across two model families — Claude's Fable 5 and OpenAI's GPT-5.6 Sol — that hundred bucks turns into a real-world stress test of what "AI video generation" means in practice right now: not just clip quality, but prompt iteration costs, render queues, audio sync, and the dozens of small failures that eat your budget before you get a usable minute of footage.
 
