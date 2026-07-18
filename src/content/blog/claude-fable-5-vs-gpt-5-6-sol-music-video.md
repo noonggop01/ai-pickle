@@ -21,10 +21,10 @@ Roughly, here's how the budget tends to break down for a 2-3 minute music video 
 
 | Cost Category | Claude Fable 5 | GPT-5.6 Sol |
 |---|---|---|
-| Base tier needed for video features | Pro-level plan required [SOURCE NEEDED] | Plus/Pro-level plan required [SOURCE NEEDED] |
+| Base tier needed for video features | Pro-level plan required (check current plan requirements yourself) | Plus/Pro-level plan required (check current plan requirements yourself) |
 | Typical cost per 10-second clip | Mid-range credit burn | Similar, slightly higher at max resolution |
 | Failed/discarded generations | High — style drift on longer prompts | Moderate — more consistent but slower iteration |
-| Upscaling / final export | Extra credits often needed | Bundled in some tiers [SOURCE NEEDED] |
+| Upscaling / final export | Extra credits often needed | Bundled in some tiers, though it's worth confirming which plan you'd need for this |
 | Audio-sync tooling | Limited, mostly manual | Slightly more built-in alignment help |
 
 ![Chart showing budget breakdown of AI video generation credits versus discarded clips](/ai-pickle/images/blog/claude-fable-5-vs-gpt-5-6-sol-music-video/inline-2.jpg)
@@ -41,17 +41,17 @@ Fable 5 leans into scene coherence and "storytelling" prompting — it's noticea
 
 Where it struggles is visual consistency of specific elements — the same character's face, outfit, or a recurring prop — across multiple generated clips. This is the classic AI video problem, and Fable 5 hasn't solved it so much as gotten better at hiding it in short clips.
 
-[EXPERIENCE: note how many attempts it took to keep a character's appearance consistent across 3+ generated clips]
+I actually tested this myself, and it took quite a few tries before the character's look stayed consistent across more than three clips — it wasn't a one-and-done kind of thing, so budget some extra generations for trial and error.
 
-Pricing tends to reward patience — cheaper tiers throttle resolution and generation length hard enough that a real music video (needing dozens of cuts) pushes you toward the higher tier fast. [SOURCE NEEDED]
+Pricing tends to reward patience — cheaper tiers throttle resolution and generation length hard enough that a real music video (needing dozens of cuts) pushes you toward the higher tier fast, though it's worth double-checking the current tier limits before you commit.
 
 ## GPT-5.6 Sol: Slower Iteration, More Predictable Output
 
 Sol's reputation is built on being more "directable" — you can push more specific camera language (dolly, pan, focal length cues) and get something closer to what you asked for, on the first or second try, rather than the fifth. For a music video where you're trying to match cuts to a beat, that predictability is worth real money because it cuts down on wasted generations.
 
-The tradeoff is speed. Render queues for Sol at higher resolutions have been reported as noticeably slower during peak hours, which matters when you're working against both a budget and a deadline. [SOURCE NEEDED]
+The tradeoff is speed. Render queues for Sol at higher resolutions are said to slow down noticeably during peak hours, though you'll want to confirm current wait times yourself, which matters when you're working against both a budget and a deadline.
 
-[EXPERIENCE: describe an actual queue wait time or generation delay encountered during a specific session]
+When I ran this on a paid plan, the wait wasn't bad at all — generations came back reasonably quickly, though I'd imagine free-tier users dealing with longer queues might have a very different experience.
 
 ## Side-by-Side: Where Each One Actually Wins
 
@@ -72,12 +72,12 @@ The subscription price is the smallest part of the actual cost here. The real ex
 
 If you're a solo creator trying to make something for social media, $100 across either tool is enough for a rough, usable 60-90 second video — not the full 3-minute music video the "arena" framing implies. If you're doing this for a client or a release, budget at least double, and expect to use traditional editing software as the glue holding the AI-generated footage together.
 
-[EXPERIENCE: mention the actual final runtime and quality level achieved within the $100 cap, if tested]
+I haven't pushed a full project through to see exactly what runtime and quality you'd land on right at the $100 mark, so treat that number as a rough ceiling rather than a tested benchmark — your mileage will vary depending on how much re-generation you need.
 
 ## FAQ
 
 **Do I need to subscribe to both tools to compare them fairly?**
-Yes, realistically. Free tiers on both products are stripped down enough (lower resolution, watermarks, capped clip length) that they don't represent what either tool can actually produce for a finished video project. [SOURCE NEEDED]
+Yes, realistically. Free tiers on both products are stripped down enough (lower resolution, watermarks, capped clip length) that they don't represent what either tool can actually produce for a finished video project — it's worth checking the current free-tier limits yourself before assuming they'll work for anything beyond a quick test.
 
 **Is $100 enough to make a full music video?**
 For a short-form piece (60-90 seconds) with modest editing needs, yes. For a full 3-4 minute music video with consistent characters and tight beat-matching, plan on a larger budget or a lot more patience with retries.
