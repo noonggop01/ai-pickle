@@ -8,6 +8,8 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: telegram-approve
@@ -16,6 +18,8 @@ concurrency:
 jobs:
   poll:
     runs-on: ubuntu-latest
+    outputs:
+      published: ${{ steps.poll.outputs.published }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -25,6 +29,7 @@ jobs:
       - run: npm ci
 
       - name: Poll Telegram for approvals
+        id: poll
         run: |
           git config user.name "ai-pickle-bot"
           git config user.email "actions@users.noreply.github.com"
@@ -34,3 +39,29 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+
+  # Runs in the same workflow (not a separate `gh workflow run deploy.yml`
+  # call) because the default GITHUB_TOKEN can't trigger other workflows —
+  # that call was silently failing to deploy anything approved via Telegram.
+  deploy:
+    needs: poll
+    if: needs.poll.outputs.published == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -12,7 +12,7 @@
 // unfinished draft.
 
 import { execSync } from 'node:child_process';
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, appendFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { getUpdates, confirmUpdatesThrough, answerCallbackQuery, sendMessage } from './lib/telegram.mjs';
 import { splitFrontmatter, setFrontmatterField, joinFrontmatter } from './lib/frontmatter.mjs';
@@ -130,10 +130,14 @@ async function processApproval(prNumber) {
     return;
   }
 
-  // Pushes/merges made with the default GITHUB_TOKEN don't trigger other
-  // workflows' `on: push` (a loop-prevention rule) — deploy.yml wouldn't
-  // fire on its own, so kick it off explicitly.
-  sh('gh workflow run deploy.yml --ref master');
+  // The default GITHUB_TOKEN can't trigger other workflows (`on: push` or
+  // `workflow_dispatch` both get silently ignored — a loop-prevention
+  // rule), so `gh workflow run deploy.yml` from here never actually
+  // deploys. Signal the workflow instead so it can build+deploy inline in
+  // this same run, which doesn't hit that restriction.
+  if (process.env.GITHUB_OUTPUT) {
+    await appendFile(process.env.GITHUB_OUTPUT, 'published=true\n');
+  }
 
   await sendMessage(`🎉 발행됐어요! ${SITE_URL}/blog/${slug}/`);
 }
