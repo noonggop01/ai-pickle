@@ -1,0 +1,20 @@
+{
+  "heroImageAlt": "$100 AI Music Video Test: Claude Fable 5 vs GPT-5.6 Sol",
+  "imageSuggestions": [
+    {
+      "placement": "Hero image at top of article",
+      "concept": "Split-screen still comparing two AI-generated music video frames, one styled by each tool, with a visible cost/credit overlay",
+      "altText": "Split screen comparison of AI-generated music video frames from Claude Fable 5 and GPT-5.6 Sol"
+    },
+    {
+      "placement": "After the first cost breakdown table",
+      "concept": "A mock budget ledger showing credits spent versus usable clips produced",
+      "altText": "Chart showing budget breakdown of AI video generation credits versus discarded clips"
+    },
+    {
+      "placement": "Within the side-by-side comparison section",
+      "concept": "Storyboard-style grid showing consistency drift in a character across multiple AI-generated clips",
+      "altText": "Storyboard grid showing character consistency drift across AI-generated video clips"
+    }
+  ]
+}
