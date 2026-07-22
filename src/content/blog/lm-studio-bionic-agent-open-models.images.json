@@ -1,0 +1,20 @@
+{
+  "heroImageAlt": "LM Studio Bionic: Agentic Tool Use for Local Models",
+  "imageSuggestions": [
+    {
+      "placement": "Hero image",
+      "concept": "A local machine running an open-weight model with visual icons representing file access, code execution, and tool calls branching from it",
+      "altText": "Illustration of LM Studio Bionic agent connecting a local open-weight model to file and code tools"
+    },
+    {
+      "placement": "After 'How It Compares to Existing Agent Tools' section",
+      "concept": "Side-by-side visual comparing cloud-hosted agent architecture vs local agent architecture",
+      "altText": "Diagram comparing cloud-based AI agents to locally run agents like LM Studio Bionic"
+    },
+    {
+      "placement": "Within 'Where It Falls Short' section",
+      "concept": "A simple chart showing hardware requirements (VRAM/RAM) against model size for local agent performance",
+      "altText": "Chart showing hardware requirements for running agentic open-weight models locally"
+    }
+  ]
+}
