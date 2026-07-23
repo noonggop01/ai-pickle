@@ -1,0 +1,15 @@
+{
+  "heroImageAlt": "A mathematician's whiteboard filled with algebraic notation next to a laptop showing a ChatGPT conversation window",
+  "imageSuggestions": [
+    {
+      "placement": "After the intro paragraph",
+      "concept": "Split image of handwritten algebra on a whiteboard next to a chat interface",
+      "altText": "Comparison of handwritten mathematical notation and an AI chatbot conversation screen"
+    },
+    {
+      "placement": "Before the comparison table",
+      "concept": "Simple icon grid comparing chatbot logos (ChatGPT, Claude, Gemini) with a calculator/proof-checker icon",
+      "altText": "Icons representing different AI chatbots alongside a formal verification tool"
+    }
+  ]
+}
