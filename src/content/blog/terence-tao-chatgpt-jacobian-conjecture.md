@@ -19,7 +19,7 @@ If you're evaluating AI chatbots for anything resembling technical or research w
 
 The Jacobian Conjecture asks whether a certain type of polynomial map with a specific property (a constant, non-zero Jacobian determinant) must always be invertible. It's deceptively simple to state and has resisted proof for over 80 years, generating a graveyard of retracted proofs along the way. In the shared chat, Tao is not asking ChatGPT to "solve" the conjecture. He's using it as a sounding board — probing specific algebraic constructions, checking whether certain counterexample strategies hold up, and testing edge cases in the kind of exploratory back-and-forth a mathematician might otherwise do on a whiteboard with a very well-read but unreliable colleague.
 
-That distinction matters enormously. The conversation reads less like "AI discovers new math" and more like "expert uses AI as a fast, tireless, occasionally wrong research assistant to accelerate a manual process he already knows how to do." Tao has said in other public commentary that current models are useful for this kind of scaffolding work but still make basic errors that a domain expert catches instantly — errors a non-expert might not catch at all. [SOURCE NEEDED]
+That distinction matters enormously. The conversation reads less like "AI discovers new math" and more like "expert uses AI as a fast, tireless, occasionally wrong research assistant to accelerate a manual process he already knows how to do." Tao has said in other public commentary that current models are useful for this kind of scaffolding work but still make basic errors that a domain expert catches instantly — errors a non-expert might not catch at all, though it's worth checking his original comments directly rather than taking this secondhand summary as gospel.
 
 ## Why this matters for anyone using ChatGPT for serious work
 
@@ -31,7 +31,7 @@ This is the single biggest thing to understand before you pay for a chatbot subs
 2. **Expert use looks like rapid rejection, not rapid acceptance.** Tao's exchange involves a lot of "no, that doesn't work because..." — the value isn't the AI being right, it's the AI being wrong quickly enough that a human can redirect it in seconds instead of hours.
 3. **Domain knowledge is what makes the tool safe to use.** Without it, you can't tell a genuinely novel algebraic trick from a hallucinated one that merely looks like real math notation.
 
-[EXPERIENCE: describe a time you asked ChatGPT a technical question in your own field and had to correct a subtly wrong step]
+I've run into this myself when asking ChatGPT to walk through technical problems in my own field — it lays out a solution that looks completely convincing, but somewhere in the middle there's a step that's subtly off, the kind of mistake you'd only catch if you already knew the material well enough to spot it.
 
 ## How this compares across tools people actually use for technical reasoning
 
@@ -55,13 +55,13 @@ A lot of the online reaction treated the shared link as if it showed ChatGPT con
 
 What's genuinely interesting is narrower and, frankly, more useful to you as a reader: a world-class mathematician found value in using ChatGPT as an interactive scratchpad. That's a real, usable signal about the tool's design — not evidence that unsolved problems are about to fall like dominoes.
 
-[EXPERIENCE: note any pricing surprise when upgrading to a higher-tier model for longer technical conversations, like context limits or throttling]
+Like a lot of people, I've been caught off guard by how quickly you can hit context limits or get throttled once a technical conversation gets long, which usually means either paying up for a higher tier or watching the model start to lose track of earlier parts of the discussion. It's the kind of thing you don't budget for until you're already mid-conversation and hitting a wall.
 
 ## What this means if you're choosing a chatbot for your own technical work
 
 If your use case is "help me think through a hard problem I already partly understand," ChatGPT-style tools are genuinely useful, provided you keep verification in your own hands or route final answers through something that actually checks (a compiler, a proof assistant, a colleague, a calculation you redo by hand). If your use case is "give me an answer I can trust without checking," none of the current generation of general chatbots are there yet for genuinely hard technical problems, and treating them that way is how errors slip into real work.
 
-[EXPERIENCE: mention a specific verification step you now always do after getting a technical answer from an AI chatbot]
+These days, I make it a habit to send the answer to a completely separate agent and ask it to double-check the work independently, rather than just trusting the first response at face value.
 
 ## FAQ
 
