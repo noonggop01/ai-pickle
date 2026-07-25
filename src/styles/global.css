@@ -134,6 +134,16 @@ article.post th, article.post td {
   text-align: left;
 }
 
+.author-box {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-border);
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.author-box p { margin: 0; }
+
 footer.site-footer {
   border-top: 1px solid var(--color-border);
   color: var(--color-muted);

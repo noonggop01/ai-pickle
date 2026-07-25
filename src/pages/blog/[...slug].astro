@@ -30,5 +30,14 @@ const heroImageSrc = post.data.heroImage ? withBase(post.data.heroImage) : undef
     </p>
     {heroImageSrc && <img src={heroImageSrc} alt={post.data.heroImageAlt ?? ''} />}
     <Content />
+
+    <div class="author-box">
+      <p>
+        <strong>About the author:</strong> {SITE.author} isn't a developer — just someone
+        who ended up relying on AI tools daily for a regular office job, and started
+        writing down which ones were actually worth it.
+        <a href={withBase('/about')}>More about this site &rarr;</a>
+      </p>
+    </div>
   </article>
 </BaseLayout>
