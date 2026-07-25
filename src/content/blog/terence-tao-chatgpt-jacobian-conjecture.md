@@ -7,7 +7,7 @@ tags: ["ChatGPT","AI for research","Terence Tao","AI math tools","LLM reasoning"
 heroImageAlt: "A mathematician's whiteboard filled with algebraic notation next to a laptop showing a ChatGPT conversation window"
 sourceUrl: "https://chatgpt.com/share/6a5fdc7a-d6f8-83e8-bbea-8deb42cfed56"
 heroImage: "/images/blog/terence-tao-chatgpt-jacobian-conjecture/hero.jpg"
-draft: true
+draft: false
 ---
 A shared ChatGPT conversation attributed to Fields Medalist Terence Tao made the rounds recently, showing him working through territory related to the Jacobian Conjecture — one of the more notorious open problems in algebraic geometry, sitting unsolved since 1939. People passed the link around like it was proof that AI had graduated to doing research mathematics. It hasn't. But the conversation is still one of the more useful public artifacts we have for understanding what a tool like ChatGPT is actually good for when a genuine expert sits down and uses it seriously, rather than asking it to write a poem about cats.
 
