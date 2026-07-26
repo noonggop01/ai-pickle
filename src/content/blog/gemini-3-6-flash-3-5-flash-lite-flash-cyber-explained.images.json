@@ -1,0 +1,20 @@
+{
+  "heroImageAlt": "Gemini 3.6 Flash vs 3.5 Flash-Lite vs 3.5 Flash Cyber",
+  "imageSuggestions": [
+    {
+      "placement": "Hero image at top of article",
+      "concept": "Three abstract lightning-bolt icons in different sizes representing the three Flash model tiers, side by side against a Google-blue gradient",
+      "altText": "Three stylized lightning bolt icons representing Gemini 3.6 Flash, 3.5 Flash-Lite, and 3.5 Flash Cyber model tiers"
+    },
+    {
+      "placement": "Inside the comparison table section",
+      "concept": "A simple bar chart mockup comparing speed, cost, and context window across the three models",
+      "altText": "Bar chart comparing relative speed, cost per token, and context window size across three Gemini Flash models"
+    },
+    {
+      "placement": "Near the security/Cyber section",
+      "concept": "A shield icon overlaid on a code terminal window to represent the security-focused Cyber variant",
+      "altText": "Shield icon over a terminal window symbolizing the security-focused Gemini 3.5 Flash Cyber model"
+    }
+  ]
+}
