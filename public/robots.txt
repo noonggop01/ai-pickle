@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://noonggop01.github.io/ai-pickle/sitemap-index.xml
