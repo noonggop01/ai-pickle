@@ -8,7 +8,9 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "test": "node --test scripts/lib/telegram.test.mjs",
+    "test": "node --test scripts/lib/telegram.test.mjs scripts/lib/content-validation.test.mjs",
+    "validate:content": "node scripts/validate-published-content.mjs",
+    "check": "npm test && npm run validate:content && npm run build",
     "preview": "astro preview",
     "astro": "astro",
     "research:keywords": "node scripts/agents/keyword-research.mjs",
@@ -18,7 +20,8 @@
     "pipeline": "node scripts/pipeline.mjs"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.3",
-    "astro": "^7.1.0"
+    "@astrojs/rss": "4.0.19",
+    "@astrojs/sitemap": "3.7.3",
+    "astro": "7.1.6"
   }
 }

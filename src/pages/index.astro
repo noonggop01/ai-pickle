@@ -3,12 +3,37 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE } from '../site.config';
 import PostList from '../components/PostList.astro';
+import { categorySlug } from '../lib/category';
+import { withBase } from '../lib/url';
 
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 const posts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const categories = [...new Set(posts.map((post) => post.data.category))].sort();
 ---
 
 <BaseLayout title={SITE.name} description={SITE.description}>
-  <p class="post-meta">{SITE.tagline}</p>
-  <PostList posts={posts} />
+  <section class="home-hero" aria-labelledby="home-title">
+    <p class="eyebrow">Independent AI tool analysis</p>
+    <h1 id="home-title">AI tools, explained without the hype.</h1>
+    <p class="home-intro">
+      Practical breakdowns for people who want to know what a tool does, what it costs in
+      time and money, and where it falls short before they commit.
+    </p>
+    <div class="category-links" aria-label="Browse by topic">
+      {categories.map((category) => (
+        <a href={withBase(`/category/${categorySlug(category)}/`)}>{category}</a>
+      ))}
+    </div>
+  </section>
+
+  <section class="latest-posts" aria-labelledby="latest-heading">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Fresh from the pipeline</p>
+        <h2 id="latest-heading">Latest analysis</h2>
+      </div>
+      <span>{posts.length} articles</span>
+    </div>
+    <PostList posts={posts} headingLevel={3} />
+  </section>
 </BaseLayout>

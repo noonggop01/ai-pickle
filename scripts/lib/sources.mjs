@@ -1,4 +1,4 @@
-const USER_AGENT = 'ai-pickle-keyword-bot/1.0 (contact: contact@example.com)';
+const USER_AGENT = 'ai-pickle-keyword-bot/1.0 (contact: noonggop01+aipickle@gmail.com)';
 
 // Google Trends' realtime/daily trending searches feed (US). Public, no API key.
 // Gives relative "what's hot right now" signal, not absolute search volume.

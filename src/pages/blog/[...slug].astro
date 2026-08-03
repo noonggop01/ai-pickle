@@ -15,29 +15,70 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-
-const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const dateFormatter = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
 const heroImageSrc = post.data.heroImage ? withBase(post.data.heroImage) : undefined;
+const sourceHost = post.data.sourceUrl ? new URL(post.data.sourceUrl).hostname.replace(/^www\./, '') : undefined;
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description} ogImage={heroImageSrc}>
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  ogImage={heroImageSrc}
+  article={{
+    pubDate: post.data.pubDate,
+    updatedDate: post.data.updatedDate,
+    tags: post.data.tags,
+  }}
+>
   <article class="post">
-    <h1>{post.data.title}</h1>
-    <p class="post-meta">
-      By {SITE.author} &middot; {dateFormatter.format(post.data.pubDate)}
-      {post.data.updatedDate && ` (updated ${dateFormatter.format(post.data.updatedDate)})`}
-      &middot; <a href={withBase(`/category/${categorySlug(post.data.category)}/`)}>{post.data.category}</a>
-    </p>
-    {heroImageSrc && <img src={heroImageSrc} alt={post.data.heroImageAlt ?? ''} />}
-    <Content />
+    <header class="post-header">
+      <a class="post-category" href={withBase(`/category/${categorySlug(post.data.category)}/`)}>
+        {post.data.category}
+      </a>
+      <h1>{post.data.title}</h1>
+      <p class="post-dek">{post.data.description}</p>
+      <p class="post-meta">
+        By {SITE.author} &middot; {dateFormatter.format(post.data.pubDate)}
+        {post.data.updatedDate && ` · Updated ${dateFormatter.format(post.data.updatedDate)}`}
+      </p>
+    </header>
+
+    {heroImageSrc && (
+      <img
+        class="post-hero"
+        src={heroImageSrc}
+        alt={post.data.heroImageAlt ?? ''}
+        width="1059"
+        height="556"
+        fetchpriority="high"
+        decoding="async"
+      />
+    )}
+
+    {post.data.sourceUrl && (
+      <aside class="source-note" aria-label="Primary source">
+        <span>Primary source</span>
+        <a href={post.data.sourceUrl} target="_blank" rel="noopener noreferrer">{sourceHost}</a>
+      </aside>
+    )}
+
+    <div class="post-content">
+      <Content />
+    </div>
 
     <div class="author-box">
+      <p class="eyebrow">About the author</p>
       <p>
-        <strong>About the author:</strong> {SITE.author} isn't a developer — just someone
-        who ended up relying on AI tools daily for a regular office job, and started
-        writing down which ones were actually worth it.
-        <a href={withBase('/about')}>More about this site &rarr;</a>
+        <strong>{SITE.author}</strong> is a regular office worker who uses AI tools in
+        day-to-day work and runs {SITE.name} to separate useful products from marketing
+        noise. Research and drafting are AI-assisted; every published post is personally
+        reviewed for clarity, sourcing, and honest framing.
       </p>
+      <a href={withBase('/about')}>How AI Pickle reviews tools &rarr;</a>
     </div>
   </article>
 </BaseLayout>
