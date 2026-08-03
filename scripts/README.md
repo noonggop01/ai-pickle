@@ -23,7 +23,8 @@ verify `[SOURCE NEEDED]` claims, flip `draft: false`, commit, push).
 
 ## Daily automation: `.github/workflows/daily-draft.yml`
 
-Runs `npm run pipeline` on a schedule (01:00 UTC = 10:00 KST) using the
+Runs `npm run pipeline` on a schedule (10:07 KST, deliberately off the
+top of the hour to reduce GitHub Actions queue delays) using the
 `ANTHROPIC_API_KEY` repo secret, and — if a new draft was produced — opens
 a pull request with it (branch `draft/<date>-<run>`) instead of pushing
 straight to `master`. **The post stays `draft: true` and does not go live
@@ -52,8 +53,12 @@ with the title, category, QA summary, a count of remaining
 `[EXPERIENCE]`/`[SOURCE NEEDED]` markers, the PR link, and an
 "✅ Approve & Publish" inline button.
 
-A separate poller workflow checks Telegram every 5 minutes
-(`telegram-approve-poller.mjs`) for two kinds of replies:
+A separate poller workflow asks GitHub Actions to check Telegram every 5
+minutes (`telegram-approve-poller.mjs`) for two kinds of replies. GitHub
+scheduled runs are best-effort, so Telegram API failures are retried and a
+failed update is left unconfirmed for the next run instead of being lost.
+When an older draft is still open, the next daily run also sends a fresh
+Approve button instead of only sending a PR link.
 
 **Tapping "✅ 승인하고 발행" (Approve & Publish):**
 1. Re-scans the PR's post file(s) for unresolved `[EXPERIENCE:` /

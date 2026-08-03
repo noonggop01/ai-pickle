@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "test": "node --test scripts/lib/telegram.test.mjs",
     "preview": "astro preview",
     "astro": "astro",
     "research:keywords": "node scripts/agents/keyword-research.mjs",

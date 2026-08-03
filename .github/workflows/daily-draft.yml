@@ -2,8 +2,10 @@ name: Daily Draft Generation
 
 on:
   schedule:
-    # 01:00 UTC = 10:00 KST
-    - cron: '0 1 * * *'
+    # Avoid the top-of-hour GitHub Actions queue, where scheduled jobs are
+    # most likely to be delayed or dropped. This runs at 10:07 KST.
+    - cron: '7 10 * * *'
+      timezone: 'Asia/Seoul'
   workflow_dispatch:
     inputs:
       index:
@@ -30,10 +32,15 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          EXISTING_URL=$(gh pr list --state open --json url,headRefName --jq '[.[] | select(.headRefName | startswith("draft/"))][0].url // empty')
-          if [ -n "$EXISTING_URL" ]; then
+          EXISTING=$(gh pr list --state open --json number,url,headRefName --jq '[.[] | select(.headRefName | startswith("draft/"))][0] // empty')
+          if [ -n "$EXISTING" ]; then
+            EXISTING_NUMBER=$(echo "$EXISTING" | jq -r '.number')
+            EXISTING_URL=$(echo "$EXISTING" | jq -r '.url')
             echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "number=$EXISTING_NUMBER" >> "$GITHUB_OUTPUT"
             echo "url=$EXISTING_URL" >> "$GITHUB_OUTPUT"
+            echo "### Draft generation paused" >> "$GITHUB_STEP_SUMMARY"
+            echo "Pending review: PR #$EXISTING_NUMBER ($EXISTING_URL)" >> "$GITHUB_STEP_SUMMARY"
           else
             echo "exists=false" >> "$GITHUB_OUTPUT"
           fi
@@ -45,7 +52,9 @@ jobs:
       - name: Remind about the pending PR instead
         if: steps.check-existing.outputs.exists == 'true'
         run: |
-          node -e "import('./scripts/lib/telegram.mjs').then(({sendMessage}) => sendMessage('아직 검토 안 된 초안이 남아있어서 오늘은 새로 안 만들었어요. 먼저 처리해주세요: ${{ steps.check-existing.outputs.url }}'))"
+          node scripts/remind-pending-draft.mjs \
+            --pr "${{ steps.check-existing.outputs.number }}" \
+            --pr-url "${{ steps.check-existing.outputs.url }}"
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}

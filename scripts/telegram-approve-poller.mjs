@@ -54,6 +54,12 @@ async function waitForMergeable(prNumber, attempts = 6, delayMs = 5000) {
   return 'UNKNOWN';
 }
 
+async function markPublishedForWorkflow() {
+  if (process.env.GITHUB_OUTPUT) {
+    await appendFile(process.env.GITHUB_OUTPUT, 'published=true\n');
+  }
+}
+
 function checkoutPrBranch(headRefName) {
   sh(`git fetch origin ${headRefName}`);
   sh(`git checkout ${headRefName}`);
@@ -70,6 +76,7 @@ async function processApproval(prNumber) {
   const pr = JSON.parse(sh(`gh pr view ${prNumber} --json state,headRefName,url,number`));
 
   if (pr.state !== 'OPEN') {
+    if (pr.state === 'MERGED') await markPublishedForWorkflow();
     await sendMessage(`PR #${prNumber}은 이미 ${pr.state === 'MERGED' ? '발행됨' : '닫힘'} 상태예요 — 할 일 없음.`);
     return;
   }
@@ -126,8 +133,10 @@ async function processApproval(prNumber) {
   try {
     sh(`gh pr merge ${prNumber} --squash --delete-branch`);
   } catch (err) {
-    await sendMessage(`PR #${prNumber} 머지에 실패했어요 (${mergeable === 'UNKNOWN' ? 'GitHub가 아직 머지 가능 여부를 계산 중일 수 있어요, 잠시 후 다시 승인해주세요' : err.message}): ${pr.url}`);
-    return;
+    const detail = mergeable === 'UNKNOWN'
+      ? 'GitHub가 아직 머지 가능 여부를 계산 중일 수 있어요.'
+      : err.message;
+    throw new Error(`PR #${prNumber} 머지 실패: ${detail} ${pr.url}`);
   }
 
   // The default GITHUB_TOKEN can't trigger other workflows (`on: push` or
@@ -135,11 +144,13 @@ async function processApproval(prNumber) {
   // rule), so `gh workflow run deploy.yml` from here never actually
   // deploys. Signal the workflow instead so it can build+deploy inline in
   // this same run, which doesn't hit that restriction.
-  if (process.env.GITHUB_OUTPUT) {
-    await appendFile(process.env.GITHUB_OUTPUT, 'published=true\n');
-  }
+  await markPublishedForWorkflow();
 
-  await sendMessage(`🎉 발행됐어요! ${SITE_URL}/blog/${slug}/`);
+  try {
+    await sendMessage(`🎉 발행됐어요! ${SITE_URL}/blog/${slug}/`);
+  } catch (error) {
+    console.warn(`Post was published, but the Telegram success message failed: ${error.message}`);
+  }
 }
 
 async function processLocalizeNotes(koreanNotes) {
@@ -177,8 +188,11 @@ async function processLocalizeNotes(koreanNotes) {
   }
 
   sh('git add src/content/blog');
-  sh('git commit -m "Localize placeholders from Telegram notes"');
-  sh(`git push origin ${pr.headRefName}`);
+  const stagedFiles = sh('git diff --staged --name-only');
+  if (stagedFiles) {
+    sh('git commit -m "Localize placeholders from Telegram notes"');
+    sh(`git push origin ${pr.headRefName}`);
+  }
 
   if (remaining > 0) {
     await sendMessage(
@@ -194,38 +208,51 @@ async function processLocalizeNotes(koreanNotes) {
 }
 
 async function main() {
-  const updates = await getUpdates();
+  const updates = (await getUpdates()).sort((a, b) => a.update_id - b.update_id);
   if (updates.length === 0) return;
 
-  let maxUpdateId = 0;
+  console.log(`Processing ${updates.length} Telegram update(s).`);
   for (const update of updates) {
-    maxUpdateId = Math.max(maxUpdateId, update.update_id);
+    try {
+      const callback = update.callback_query;
+      if (callback?.data) {
+        const match = callback.data.match(/^approve:(\d+)$/);
+        if (match) {
+          try {
+            await answerCallbackQuery(callback.id, 'Processing...');
+          } catch (error) {
+            console.warn(`Could not acknowledge Telegram callback ${update.update_id}: ${error.message}`);
+          }
 
-    const callback = update.callback_query;
-    if (callback?.data) {
-      const match = callback.data.match(/^approve:(\d+)$/);
-      if (match) {
-        await answerCallbackQuery(callback.id, 'Processing...');
-        try {
+          console.log(`Processing approval for PR #${match[1]} from update ${update.update_id}.`);
           await processApproval(match[1]);
-        } catch (err) {
-          await sendMessage(`PR #${match[1]} 승인 처리 중 오류: ${err.message}`);
+        }
+      } else {
+        const text = update.message?.text;
+        if (text && !text.startsWith('/')) {
+          console.log(`Processing Korean draft notes from update ${update.update_id}.`);
+          await processLocalizeNotes(text);
         }
       }
-      continue;
-    }
 
-    const text = update.message?.text;
-    if (text && !text.startsWith('/')) {
+      await confirmUpdatesThrough(update.update_id);
+      console.log(`Confirmed Telegram update ${update.update_id}.`);
+    } catch (error) {
+      console.error(`Telegram update ${update.update_id} failed and will be retried: ${error.message}`);
+      const callbackPr = update.callback_query?.data?.match(/^approve:(\d+)$/)?.[1];
+      const errorMessage = callbackPr
+        ? `PR #${callbackPr} 승인 처리 중 오류가 났어요. 자동으로 다시 시도할게요: ${error.message}`
+        : `내용 반영 중 오류가 났어요. 자동으로 다시 시도할게요: ${error.message}`;
+
       try {
-        await processLocalizeNotes(text);
-      } catch (err) {
-        await sendMessage(`내용 반영 중 오류가 났어요: ${err.message}`);
+        await sendMessage(errorMessage);
+      } catch (notifyError) {
+        console.error(`Could not send Telegram failure notice: ${notifyError.message}`);
       }
+
+      throw error;
     }
   }
-
-  await confirmUpdatesThrough(maxUpdateId);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
