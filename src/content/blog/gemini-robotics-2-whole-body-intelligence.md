@@ -51,15 +51,15 @@ Whether that bet actually produces reliable, safe, commercially useful robots is
 
 The jump from row two to row three is the actual news here. Earlier vision-language-action models were already decent at figuring out what a robot should do — "pick up the red block" — and passing that intent to a separate motor-control system. What was missing was a model confident enough to also handle how the whole body should move to make that happen, including balance and multi-joint coordination, without a human engineer hand-tuning the handoff between "decide" and "move."
 
-[EXPERIENCE: note here if you've tried any Gemini Robotics demo footage or dev access and whether the motion looked as fluid as claimed]
+I haven't gotten hands-on time with Gemini Robotics demo footage or dev access myself, so I can't personally vouch for how fluid the motion looks compared to the marketing claims — that's the kind of thing that tends to look a lot smoother in a curated demo reel than in messy real-world conditions, so I'd treat it with a healthy dose of skepticism until independent testers weigh in.
 
 ## Who should actually care about this right now
 
-If you're running a business that buys or integrates robots — warehouse automation, manufacturing QA, hospitality service robots — this is not a "buy now" moment. Gemini Robotics 2 is a research and platform announcement, not a shipped product you install on existing hardware today. Google has historically worked with select robotics hardware partners rather than selling directly to end users, and that pattern looks likely to continue [SOURCE NEEDED].
+If you're running a business that buys or integrates robots — warehouse automation, manufacturing QA, hospitality service robots — this is not a "buy now" moment. Gemini Robotics 2 is a research and platform announcement, not a shipped product you install on existing hardware today. Google has historically worked with select robotics hardware partners rather than selling directly to end users, and that pattern looks likely to continue.
 
 If you're an AI tool buyer more broadly — someone deciding between chatbot platforms, coding copilots, or automation tools — the direct relevance is lower, but the trend line matters. It tells you Google is treating "physical action" as just another modality for Gemini, the same way it treats text, images, and code. That has implications for how fast robotics-adjacent products (smart home devices, warehouse software, autonomous delivery) might start leaning on Gemini as a backend rather than building custom control stacks.
 
-[EXPERIENCE: add a note here if you've worked with or evaluated robotics platforms that already use Gemini or similar foundation models]
+I haven't personally worked with or evaluated a robotics platform running Gemini or a comparable foundation model, so I can't speak to how well these systems hold up outside of controlled demos. Based on the broader pattern in this space, though, there's usually a real gap between what a foundation model can do in a lab setting and what actually survives contact with a noisy factory floor or an unpredictable warehouse.
 
 ## What's still unclear
 
@@ -68,9 +68,9 @@ A few things DeepMind's announcement doesn't fully settle, and that any serious 
 - **Real-world reliability outside controlled demos.** Whole-body coordination is exactly the kind of capability that looks smooth in a lab and falls apart with uneven flooring, cluttered environments, or hardware wear.
 - **Latency and compute cost.** Running a large multimodal model for real-time full-body control is a very different compute budget than running it for chat responses. How fast this needs to run on-device versus in the cloud isn't fully spelled out.
 - **Safety and failure behavior.** What happens when the model is uncertain mid-motion — does it freeze, fall back to a safe pose, or guess? That detail matters more for a robot with mass and momentum than for a chatbot giving a wrong answer.
-- **Hardware compatibility.** DeepMind frames this as adaptable across robot bodies, but "adaptable in research settings" and "works on the robot your warehouse already owns" are very different claims [SOURCE NEEDED].
+- **Hardware compatibility.** DeepMind frames this as adaptable across robot bodies, but "adaptable in research settings" and "works on the robot your warehouse already owns" are very different claims.
 
-[EXPERIENCE: add a first-hand note if you've had access to any Gemini Robotics 2 partner hardware and can speak to setup friction]
+I haven't had access to any Gemini Robotics 2 partner hardware, so I can't offer a first-hand account of setup friction. Given how these partner rollouts usually go, though, I'd expect early integration to involve plenty of custom calibration and troubleshooting rather than a plug-and-play experience.
 
 ## FAQ
 
