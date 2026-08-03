@@ -7,7 +7,7 @@ tags: ["Gemini","Google AI","Gemini Flash","AI models comparison","LLM pricing"]
 sourceUrl: "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-6-flash-3-5-flash-lite-3-5-flash-cyber/"
 heroImage: "/images/blog/gemini-3-6-flash-3-5-flash-lite-flash-cyber-explained/hero.jpg"
 heroImageAlt: "Gemini 3.6 Flash vs 3.5 Flash-Lite vs 3.5 Flash Cyber"
-draft: true
+draft: false
 ---
 Google just split its "Flash" lineup into three distinct models instead of one, and if you're building anything on Gemini right now, that naming change is going to cost you an afternoon of documentation-reading whether you like it or not. Here's what actually changed, what each model is for, and which one you probably want.
 
