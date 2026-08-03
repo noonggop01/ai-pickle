@@ -4,48 +4,53 @@ import { SITE } from '../site.config';
 import { withBase } from '../lib/url';
 
 const title = 'About';
-const description = `About ${SITE.name} — who writes it and how each post gets made.`;
+const description = `Meet ${SITE.author}, learn why ${SITE.name} exists, and see how every article is researched and reviewed.`;
 ---
 
 <BaseLayout title={title} description={description}>
-  <h1>About {SITE.name}</h1>
+  <article class="post">
+    <p class="eyebrow">Behind AI Pickle</p>
+    <h1>AI advice for regular people, not a benchmark leaderboard.</h1>
 
-  <p>
-    Hi, I'm {SITE.author}. I'm not a developer — I work a regular office job where, like a
-    lot of people right now, I ended up relying on AI tools daily just to get through the
-    work. That's the actual reason {SITE.name} exists: I kept hitting the same question —
-    "is this new tool actually worth switching to, or is it just marketing" — and started
-    writing down the answers for myself. This site is that, made public.
-  </p>
+    <p class="post-dek">
+      Hi, I'm {SITE.author}. I work a regular office job, use AI tools in day-to-day work,
+      and started {SITE.name} to answer a practical question: is a new tool genuinely
+      useful, or is it mostly marketing?
+    </p>
 
-  <p>
-    Because of that background, I'm not writing as an engineer benchmarking model
-    architectures. I'm writing as someone evaluating these tools the way most readers
-    probably are: does it save real time, is it worth the subscription, what breaks when
-    you actually try to use it for something that matters.
-  </p>
+    <h2>What I look for</h2>
+    <p>
+      I am not an engineer grading model architecture. I evaluate tools from a working
+      user's point of view: how quickly they become useful, what they cost, where the
+      workflow breaks, and whether the result is worth switching tools or paying for
+      another subscription.
+    </p>
 
-  <h2>How posts get made</h2>
-  <p>
-    I'll be upfront about this rather than pretend otherwise: {SITE.name} runs on an
-    AI-assisted publishing pipeline I built myself — research, drafting, and image
-    generation are automated, but nothing goes live without me personally reviewing it
-    first. I check claims, cut anything that doesn't hold up, and add real context from my
-    own use where I have it. Where a claim is genuinely from hands-on testing, it reads
-    that way; where it's drawn from public information or reporting instead, I try to keep
-    the framing honest about that rather than implying first-hand experience I don't have.
-    I'm not paid for positive coverage.
-  </p>
+    <h2>How articles are made</h2>
+    <p>
+      Research, first drafts, and image generation are supported by an automated AI
+      pipeline. Nothing is meant to go live without a human review. Before publication, I
+      check the source, remove unsupported claims, improve unclear English, and make sure
+      the article does not imply hands-on testing that did not happen.
+    </p>
+    <p>
+      When an article includes first-hand results, it says exactly what was tested. When
+      it summarizes public reporting or product documentation, the primary source is
+      linked near the top of the article. Corrections are welcome and are reflected in an
+      updated date when they materially change a post.
+    </p>
 
-  <h2>Advertising</h2>
-  <p>
-    This site is supported by display advertising (including Google AdSense) and may,
-    in the future, include affiliate links clearly marked as such. Advertising and
-    affiliate relationships never determine my conclusions.
-  </p>
+    <h2>Independence and advertising</h2>
+    <p>
+      {SITE.name} does not currently run display ads or affiliate links. If that changes,
+      commercial relationships will be clearly disclosed and will not determine the
+      conclusion of a review.
+    </p>
 
-  <h2>Contact</h2>
-  <p>
-    Questions, corrections, or tips? Reach out on the <a href={withBase('/contact')}>contact page</a>.
-  </p>
+    <h2>Contact</h2>
+    <p>
+      Have a correction, a tool worth investigating, or a question? Use the
+      <a href={withBase('/contact')}> contact page</a>.
+    </p>
+  </article>
 </BaseLayout>
