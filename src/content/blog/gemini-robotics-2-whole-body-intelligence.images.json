@@ -1,0 +1,20 @@
+{
+  "heroImageAlt": "Gemini Robotics 2: What \"Whole Body Intelligence\" Means",
+  "imageSuggestions": [
+    {
+      "placement": "After intro, before first H2",
+      "concept": "A humanoid robot performing a full-body task like bending to pick up an object and turning to place it on a shelf",
+      "altText": "Humanoid robot bending and reaching to move an object, illustrating whole body coordination"
+    },
+    {
+      "placement": "Inside 'How this compares' section",
+      "concept": "Split-screen diagram comparing arm-only robotic manipulation versus full-body coordinated movement",
+      "altText": "Diagram comparing single-arm robot manipulation to whole body robot movement"
+    },
+    {
+      "placement": "Near FAQ section",
+      "concept": "Close-up of a robot's legs and torso mid-step, showing balance and joint coordination",
+      "altText": "Close-up of robot legs and torso demonstrating balance during walking motion"
+    }
+  ]
+}
