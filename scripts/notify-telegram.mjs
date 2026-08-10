@@ -12,6 +12,9 @@ import { sendMessage } from './lib/telegram.mjs';
 import { translateHintsToKorean } from './lib/localize.mjs';
 import { loadDotEnv } from './lib/env.mjs';
 
+const MANUAL_APPROVAL_URL =
+  'https://github.com/noonggop01/ai-pickle/actions/workflows/telegram-approve.yml';
+
 function parseArgs(argv) {
   const args = {};
   for (let i = 0; i < argv.length; i++) {
@@ -69,13 +72,22 @@ async function main() {
     lines.push('채울 내용 없음 — 바로 승인하셔도 돼요.');
   }
 
-  lines.push('', `전체 보기: ${prUrl}`, '', '다 되면 아래 버튼으로 승인하면 바로 발행돼요.');
+  lines.push(
+    '',
+    `전체 보기: ${prUrl}`,
+    '',
+    '다 되면 아래 버튼으로 승인하면 발행돼요.',
+    '승인 후 15분이 지나도 게시되지 않으면 두 번째 버튼에서 Run workflow를 눌러주세요.',
+  );
 
   await sendMessage(
     lines.filter((l) => l !== null).join('\n'),
     {
       replyMarkup: {
-        inline_keyboard: [[{ text: '✅ 승인하고 발행', callback_data: `approve:${pr}` }]],
+        inline_keyboard: [
+          [{ text: '✅ 승인하고 발행', callback_data: `approve:${pr}` }],
+          [{ text: '⚡ 15분 지연 시 수동 실행', url: MANUAL_APPROVAL_URL }],
+        ],
       },
     },
   );

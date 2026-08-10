@@ -6,6 +6,12 @@ on:
     # most likely to be delayed or dropped. This runs at 10:07 KST.
     - cron: '7 10 * * *'
       timezone: 'Asia/Seoul'
+    # GitHub's free scheduled jobs can be delayed during busy periods.
+    # These silent retries create the draft only if the 10:07 run did not.
+    - cron: '22,37,52 10 * * *'
+      timezone: 'Asia/Seoul'
+    - cron: '7,22,37,52 11 * * *'
+      timezone: 'Asia/Seoul'
   workflow_dispatch:
     inputs:
       index:
@@ -50,7 +56,9 @@ jobs:
       # reply meant for PR A to get misapplied to PR B (there was no
       # reliable way to tell which PR a plain-text reply was about).
       - name: Remind about the pending PR instead
-        if: steps.check-existing.outputs.exists == 'true'
+        if: >-
+          steps.check-existing.outputs.exists == 'true' &&
+          (github.event_name == 'workflow_dispatch' || github.event.schedule == '7 10 * * *')
         run: |
           node scripts/remind-pending-draft.mjs \
             --pr "${{ steps.check-existing.outputs.number }}" \
@@ -65,6 +73,8 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+        if: steps.check-existing.outputs.exists == 'false'
+      - run: npm audit --audit-level=high
         if: steps.check-existing.outputs.exists == 'false'
 
       - name: Run Agents 1-4
