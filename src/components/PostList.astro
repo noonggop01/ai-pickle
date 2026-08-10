@@ -5,30 +5,44 @@ import { categorySlug } from '../lib/category';
 
 interface Props {
   posts: any[];
+  headingLevel?: 2 | 3;
 }
 
-const { posts } = Astro.props;
-const dateFormatter = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const { posts, headingLevel = 2 } = Astro.props;
+const Heading = headingLevel === 3 ? 'h3' : 'h2';
+const dateFormatter = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
 ---
 
 {posts.length === 0 ? (
-  <p>No posts yet — check back soon.</p>
+  <p>No posts yet. Check back soon.</p>
 ) : (
   <ul class="post-list">
     {posts.map((post) => (
       <li class="post-list-item">
         {post.data.heroImage && (
           <a href={withBase(`/blog/${post.id}/`)} class="post-thumb-link" tabindex="-1" aria-hidden="true">
-            <img class="post-thumb" src={withBase(post.data.heroImage)} alt="" loading="lazy" />
+            <img
+              class="post-thumb"
+              src={withBase(post.data.heroImage)}
+              alt=""
+              width="96"
+              height="96"
+              loading="lazy"
+              decoding="async"
+            />
           </a>
         )}
-        <div>
-          <h2><a href={withBase(`/blog/${post.id}/`)}>{post.data.title}</a></h2>
+        <div class="post-list-copy">
+          <Heading><a href={withBase(`/blog/${post.id}/`)}>{post.data.title}</a></Heading>
           <p class="post-meta">
             By {SITE.author} &middot; {dateFormatter.format(post.data.pubDate)} &middot;{' '}
             <a href={withBase(`/category/${categorySlug(post.data.category)}/`)}>{post.data.category}</a>
           </p>
-          <p>{post.data.description}</p>
+          <p class="post-description">{post.data.description}</p>
         </div>
       </li>
     ))}
