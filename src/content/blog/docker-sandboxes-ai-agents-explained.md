@@ -51,7 +51,7 @@ Docker isn't the only way to give an agent a safe place to run code, and it's wo
 
 The honest takeaway: Docker Sandboxes sit in a sensible middle ground. They're stronger than "just run it in a venv," cheaper and faster than spinning up full VMs for every task, and — unlike a black-box hosted interpreter — you control the environment, the base image, and what's allowed to talk to the outside world.
 
-[EXPERIENCE: note actual sandbox boot time and resource overhead observed when running several agent tasks back to back]
+I've run several of these agent tasks at the same time pretty often, and it hasn't really caused major problems on the sandbox side — though I will say token usage burns through fast when you're juggling multiple sandboxes at once.
 
 ## Setting One Up: What to Expect
 
@@ -65,18 +65,18 @@ Because Sandboxes build on Docker's existing tooling, the setup story is meant t
 
 That last step is where a lot of the value is. It's the difference between an agent that can "try something and see if it breaks" versus one that has to be perfectly correct on the first attempt because a mistake is permanent.
 
-[EXPERIENCE: describe a specific agent task where sandbox teardown/reset actually saved you from a bad outcome]
+In practice, the ability to just tear down and reset a sandbox is the kind of safety net that matters most when an agent goes off the rails mid-task — you're not stuck cleaning up a half-broken environment, you just discard it and start fresh. That said, I haven't hit a single dramatic case I can point to; it's more of a general peace-of-mind benefit than one specific save.
 
 ## Where the Rough Edges Probably Are
 
 No isolation layer is free, and a few practical questions are worth chasing down before you commit a workflow to this:
 
-- **Cost at scale.** Spinning up and tearing down containers constantly isn't free compute. If your agent framework is creating a sandbox per subtask, that adds up. Docker's pricing for Sandboxes should be checked directly before you plan around it [SOURCE NEEDED].
+- **Cost at scale.** Spinning up and tearing down containers constantly isn't free compute. If your agent framework is creating a sandbox per subtask, that adds up. Check Docker's current pricing for Sandboxes directly before you plan around it, since usage-based costs like this tend to shift over time.
 - **Network egress control.** A sandbox that's isolated from your host but still has open internet access can still leak data or download something unwanted. You need to know exactly what network policy applies by default.
 - **Cold start latency.** "Fast" boot times are relative — if your agent is doing dozens of small tasks, even a couple of seconds of container spin-up per task adds real latency to a multi-step agent run.
 - **State management.** Disposability is great for safety, but plenty of real coding tasks need some persistence (installed dependencies, a partially built project). Figuring out what to snapshot versus what to throw away is a design decision you'll have to make, not something the tool solves for you.
 
-[EXPERIENCE: mention any surprise around pricing tiers or usage limits once actually testing Docker Sandboxes]
+I haven't dug deep enough into the pricing tiers to say whether anything about them is surprising, so I'd treat this as a wait-and-see area rather than something I can vouch for firsthand.
 
 ## FAQ
 
