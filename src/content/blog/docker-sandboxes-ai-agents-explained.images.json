@@ -1,0 +1,20 @@
+{
+  "heroImageAlt": "A stylized illustration of an AI agent working inside an isolated container box, disconnected from a computer's main files",
+  "imageSuggestions": [
+    {
+      "placement": "After the introduction",
+      "concept": "Diagram showing an AI agent connected to a disposable sandboxed container, separated by a wall/firewall icon from the host machine's files and credentials",
+      "altText": "Diagram illustrating an AI agent isolated inside a disposable container away from host system files"
+    },
+    {
+      "placement": "Within the comparison table section",
+      "concept": "Simple visual comparing isolation strength and speed across Docker Sandboxes, VMs, hosted interpreters, and no sandboxing",
+      "altText": "Chart comparing isolation strength and boot speed across different AI code execution sandboxing approaches"
+    },
+    {
+      "placement": "Within the setup section",
+      "concept": "Screenshot-style mockup of a terminal spinning up and tearing down a Docker sandbox container",
+      "altText": "Terminal mockup showing commands to create and destroy a disposable Docker sandbox"
+    }
+  ]
+}
