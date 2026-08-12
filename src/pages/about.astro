@@ -8,15 +8,23 @@ const description = `Meet ${SITE.author}, learn why ${SITE.name} exists, and see
 ---
 
 <BaseLayout title={title} description={description}>
-  <article class="post">
+  <article class="post author-page">
     <p class="eyebrow">Behind AI Pickle</p>
     <h1>AI advice for regular people, not a benchmark leaderboard.</h1>
 
-    <p class="post-dek">
-      Hi, I'm {SITE.author}. I work a regular office job, use AI tools in day-to-day work,
-      and started {SITE.name} to answer a practical question: is a new tool genuinely
-      useful, or is it mostly marketing?
-    </p>
+    <div class="author-summary">
+      <p class="eyebrow">About the author</p>
+      <p class="post-dek">
+        Hi, I'm {SITE.author}. I work a regular office job, use AI tools in day-to-day work,
+        and started {SITE.name} to answer a practical question: is a new tool genuinely
+        useful, or is it mostly marketing?
+      </p>
+      <p>
+        My perspective is deliberately practical rather than academic. I care about the
+        moment after the demo: whether a tool fits a real workflow, saves meaningful time,
+        and earns the money or attention it asks for.
+      </p>
+    </div>
 
     <h2>What I look for</h2>
     <p>
@@ -25,6 +33,12 @@ const description = `Meet ${SITE.author}, learn why ${SITE.name} exists, and see
       workflow breaks, and whether the result is worth switching tools or paying for
       another subscription.
     </p>
+    <ul>
+      <li><strong>Usefulness:</strong> what problem the tool solves and who benefits.</li>
+      <li><strong>Friction:</strong> setup, learning curve, integrations, limits, and failure modes.</li>
+      <li><strong>Value:</strong> what the cost buys compared with existing tools or a manual workflow.</li>
+      <li><strong>Honesty:</strong> what is verified, what is reported by the vendor, and what still needs testing.</li>
+    </ul>
 
     <h2>How articles are made</h2>
     <p>
@@ -40,11 +54,31 @@ const description = `Meet ${SITE.author}, learn why ${SITE.name} exists, and see
       updated date when they materially change a post.
     </p>
 
+    <h2>How to read a review</h2>
+    <p>
+      Articles are labeled by evidence. A hands-on result describes what was actually tested.
+      A source-based analysis explains a product announcement, study, or public report without
+      presenting it as independent testing. A practical guide focuses on a repeatable way for
+      readers to make their own comparison.
+    </p>
+    <p>
+      Product features, prices, and availability can change quickly. Check the linked primary
+      source and the publication or update date before making a purchase or operational decision.
+    </p>
+
     <h2>Independence and advertising</h2>
     <p>
       {SITE.name} does not currently run display ads or affiliate links. If that changes,
       commercial relationships will be clearly disclosed and will not determine the
       conclusion of a review.
+    </p>
+
+    <h2>Corrections and feedback</h2>
+    <p>
+      If you spot an incorrect claim, outdated product detail, broken source, or unclear
+      description of testing, please send the specific article and correction through the
+      <a href={withBase('/contact')}> contact page</a>. Substantive corrections are reflected
+      in the article's updated date.
     </p>
 
     <h2>Contact</h2>

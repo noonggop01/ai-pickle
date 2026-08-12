@@ -28,6 +28,8 @@ const ogImagePath = ogImage
 const absoluteOgImage = ogImagePath ? new URL(ogImagePath, siteBaseURL) : undefined;
 const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
 const isCurrent = (path: string) => currentPath === (withBase(path).replace(/\/+$/, '') || '/');
+const isAboutPage = currentPath === (withBase('/about').replace(/\/+$/, '') || '/');
+const authorURL = new URL(withBase('/about/'), Astro.site).href;
 
 const structuredData = article
   ? {
@@ -39,12 +41,28 @@ const structuredData = article
       mainEntityOfPage: canonicalURL.href,
       datePublished: article.pubDate.toISOString(),
       dateModified: (article.updatedDate ?? article.pubDate).toISOString(),
-      author: { '@type': 'Person', name: SITE.author },
+      author: { '@type': 'Person', name: SITE.author, url: authorURL },
       publisher: { '@type': 'Organization', name: SITE.name },
       image: absoluteOgImage?.href,
       keywords: article.tags?.join(', '),
     }
-  : {
+  : isAboutPage
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'ProfilePage',
+        name: title,
+        description,
+        url: canonicalURL.href,
+        mainEntity: {
+          '@type': 'Person',
+          name: SITE.author,
+          url: authorURL,
+          email: `mailto:${SITE.contactEmail}`,
+          worksFor: { '@type': 'Organization', name: SITE.name },
+          description: 'Independent writer and reviewer focused on the practical use of AI tools and software.',
+        },
+      }
+    : {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       name: SITE.name,
