@@ -4,6 +4,7 @@ description: "A breakdown of Microsoft's early 2026 rollout data comparing Claud
 pubDate: 2026-07-16
 category: "AI Coding Tools"
 tags: ["Claude Code","GitHub Copilot","GitHub Copilot CLI","AI coding tools","Microsoft","developer tools"]
+sourceUrl: "https://arxiv.org/abs/2607.01418"
 heroImage: "/images/blog/claude-code-vs-github-copilot-cli-microsoft-rollout/hero.jpg"
 heroImageAlt: "Two terminal windows side by side comparing Claude Code and GitHub Copilot CLI output"
 draft: false

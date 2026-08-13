@@ -259,6 +259,22 @@ h3 { font-size: 1.28rem; }
   margin-inline: auto;
 }
 
+.author-summary {
+  margin: 1.5rem 0 2.5rem;
+  padding: 1.35rem;
+  background: var(--color-accent-soft);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 18%, var(--color-border));
+  border-radius: 12px;
+}
+
+.author-summary .post-dek { margin-bottom: 0.8rem; }
+
+.author-summary p:last-child { margin-bottom: 0; }
+
+.author-page ul {
+  padding-left: 1.25rem;
+}
+
 .post-header { margin-bottom: 1.6rem; }
 
 .post-header h1 { margin: 0.8rem 0 0.75rem; }

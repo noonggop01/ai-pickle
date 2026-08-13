@@ -4,6 +4,7 @@ description: "OpenAI is pushing ChatGPT deeper into workplace tasks. Here's what
 pubDate: 2026-07-16
 category: "AI Productivity & Automation"
 tags: ["ChatGPT","ChatGPT Enterprise","AI productivity","AI at work","OpenAI"]
+sourceUrl: "https://help.openai.com/en/articles/11487775-connectors-in"
 heroImageAlt: "A person using ChatGPT on a laptop in an office setting, with documents and spreadsheets visible on screen"
 heroImage: "/images/blog/chatgpt-for-work-explained/hero.jpg"
 draft: false

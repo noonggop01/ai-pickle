@@ -4,6 +4,7 @@ description: "Claude Code reportedly sends 33k tokens of overhead before your pr
 pubDate: 2026-07-16
 category: "AI Coding Tools"
 tags: ["Claude Code","OpenCode","AI coding assistants","token usage","developer tools"]
+sourceUrl: "https://systima.ai/blog/claude-code-vs-opencode-token-overhead"
 heroImageAlt: "Split-screen visualization comparing a large token overhead block for Claude Code against a much smaller one for OpenCode"
 heroImage: "/images/blog/claude-code-vs-opencode-token-overhead/hero.jpg"
 draft: false

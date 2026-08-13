@@ -4,6 +4,7 @@ description: "A look at what it really takes to migrate a production AI agent to
 pubDate: 2026-07-16
 category: "AI Coding Tools"
 tags: ["GPT-5.6","AI agents","model migration","LLM pricing","production AI"]
+sourceUrl: "https://agenticalia.ai/en/blog/cut-ai-costs-sme-model-migration-en/"
 heroImageAlt: "Diagram showing a production AI agent pipeline being redirected from an older model version to GPT-5.6"
 heroImage: "/images/blog/gpt-5-6-production-agent-migration/hero.jpg"
 draft: false

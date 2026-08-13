@@ -5,6 +5,7 @@ pubDate: 2026-07-16
 updatedDate: 2026-08-03
 category: "AI Writing Tools"
 tags: ["claude", "chatgpt", "ai writing", "comparison"]
+sourceUrl: "https://openai.com/index/introducing-deep-research/"
 heroImage: "/images/blog/claude-vs-chatgpt-for-writing-2026/hero.jpg"
 heroImageAlt: "Claude and ChatGPT shown side by side for a writing comparison"
 draft: false
