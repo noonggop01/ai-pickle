@@ -1,6 +1,11 @@
 const API_BASE = 'https://api.telegram.org/bot';
 const DEFAULT_RETRY_DELAYS_MS = [1000, 2000, 4000];
 const RETRYABLE_STATUS_CODES = new Set([429, 500, 502, 503, 504]);
+const APPROVAL_COMMANDS = new Set(['발행', '승인', '승인하고 발행', 'publish', 'approve']);
+
+export function isApprovalCommand(text) {
+  return typeof text === 'string' && APPROVAL_COMMANDS.has(text.trim().toLowerCase());
+}
 
 function requireEnv(name) {
   const value = process.env[name];
