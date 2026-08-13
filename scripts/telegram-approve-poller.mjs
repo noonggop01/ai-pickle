@@ -14,7 +14,13 @@
 import { execSync } from 'node:child_process';
 import { readFile, writeFile, appendFile } from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
-import { getUpdates, confirmUpdatesThrough, answerCallbackQuery, sendMessage } from './lib/telegram.mjs';
+import {
+  getUpdates,
+  confirmUpdatesThrough,
+  answerCallbackQuery,
+  sendMessage,
+  isApprovalCommand,
+} from './lib/telegram.mjs';
 import { splitFrontmatter, setFrontmatterField, joinFrontmatter } from './lib/frontmatter.mjs';
 import { localizePlaceholders } from './lib/localize.mjs';
 
@@ -70,6 +76,11 @@ function getChangedPostFiles(prNumber) {
   return JSON.parse(sh(`gh pr view ${prNumber} --json files --jq ".files"`))
     .map((f) => f.path)
     .filter((p) => p.startsWith('src/content/blog/') && p.endsWith('.md'));
+}
+
+function getOpenDraftPrs() {
+  return JSON.parse(sh('gh pr list --state open --json number,headRefName,url'))
+    .filter((pr) => pr.headRefName.startsWith('draft/'));
 }
 
 async function processApproval(prNumber) {
@@ -154,7 +165,7 @@ async function processApproval(prNumber) {
 }
 
 async function processLocalizeNotes(koreanNotes) {
-  const openPRs = JSON.parse(sh('gh pr list --state open --json number,headRefName,url'));
+  const openPRs = getOpenDraftPrs();
   if (openPRs.length === 0) {
     await sendMessage('지금 열려있는 초안 PR이 없어요. 새 초안이 오면 다시 답장해주세요.');
     return;
@@ -199,12 +210,27 @@ async function processLocalizeNotes(koreanNotes) {
       `${totalFilled}개 반영했어요. 아직 ${remaining}개 남았어요 — 계속 답장하시거나 PR에서 직접 채워주세요: ${pr.url}`,
     );
   } else {
-    await sendMessage(`${totalFilled}개 다 반영했어요! 확인하고 승인해주세요: ${pr.url}`, {
+    await sendMessage(`${totalFilled}개 다 반영했어요! 확인하고 승인해주세요: ${pr.url}\n\n버튼 반응이 없으면 이 채팅에 발행이라고 보내주세요.`, {
       replyMarkup: {
         inline_keyboard: [[{ text: '✅ 승인하고 발행', callback_data: `approve:${pr.number}` }]],
       },
     });
   }
+}
+
+async function processTextApproval() {
+  const openPRs = getOpenDraftPrs();
+  if (openPRs.length === 0) {
+    await sendMessage('지금 발행을 기다리는 초안이 없어요.');
+    return;
+  }
+  if (openPRs.length > 1) {
+    const list = openPRs.map((pr) => `#${pr.number}: ${pr.url}`).join('\n');
+    await sendMessage(`발행 대기 중인 초안이 여러 개라 자동 선택할 수 없어요:\n${list}`);
+    return;
+  }
+
+  await processApproval(openPRs[0].number);
 }
 
 async function main() {
@@ -230,8 +256,13 @@ async function main() {
       } else {
         const text = update.message?.text;
         if (text && !text.startsWith('/')) {
-          console.log(`Processing Korean draft notes from update ${update.update_id}.`);
-          await processLocalizeNotes(text);
+          if (isApprovalCommand(text)) {
+            console.log(`Processing text approval from update ${update.update_id}.`);
+            await processTextApproval();
+          } else {
+            console.log(`Processing Korean draft notes from update ${update.update_id}.`);
+            await processLocalizeNotes(text);
+          }
         }
       }
 

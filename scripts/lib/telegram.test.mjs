@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { confirmUpdatesThrough, getUpdates } from './telegram.mjs';
+import { confirmUpdatesThrough, getUpdates, isApprovalCommand } from './telegram.mjs';
 
 process.env.TELEGRAM_BOT_TOKEN = 'test-token';
 
@@ -60,4 +60,12 @@ test('confirmUpdatesThrough advances the Telegram offset', async () => {
 
   assert.equal(requestedUrl.searchParams.get('offset'), '100');
   assert.equal(requestedUrl.searchParams.get('timeout'), '0');
+});
+
+test('recognizes exact Telegram approval commands', () => {
+  assert.equal(isApprovalCommand('발행'), true);
+  assert.equal(isApprovalCommand('  승인하고 발행  '), true);
+  assert.equal(isApprovalCommand('publish'), true);
+  assert.equal(isApprovalCommand('이 글을 발행해주세요'), false);
+  assert.equal(isApprovalCommand('수정할 내용입니다'), false);
 });
