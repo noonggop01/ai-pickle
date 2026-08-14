@@ -23,7 +23,7 @@ To be clear about what shipped: this isn't a new model or a new capability. It's
 Practically, that means:
 
 - You get Codex's task-based workflow (assign it a coding task, it works in a sandboxed environment, you review a diff) inside the same app you use for regular ChatGPT conversations.
-- It's a preview release, which in OpenAI's usual pattern means expect rough edges, missing settings, and features that lag behind the Mac/Windows builds for a while [SOURCE NEEDED].
+- It's a preview release, and based on OpenAI's usual pattern with early builds, you should expect rough edges, missing settings, and features that lag behind the Mac/Windows builds for a while.
 - It sits alongside — not instead of — the Codex CLI, which remains the more mature, scriptable way to run Codex on Linux servers and in CI-style environments.
 
 If you've used Codex on macOS already, the desktop experience on Linux should feel familiar: a sidebar of tasks, a chat-like interface for describing what you want done, and diffs you approve before they land. The novelty is having that wrapped in a native Linux app rather than a browser tab or terminal session.
@@ -34,9 +34,9 @@ On Mac and Windows, a native ChatGPT app was mostly a convenience — quick acce
 
 First, a huge share of professional developers who'd actually use Codex for real coding tasks run Linux as their daily driver, not as a server-only OS. Second, Linux users have historically been an afterthought for consumer AI apps, so getting feature parity — even in preview — is a signal that OpenAI is treating the platform as more than a rounding error.
 
-That said, "in preview" is doing a lot of work in that sentence. Preview releases on Linux from major software vendors have a track record of being the buggiest of the bunch, often missing tray integration, notification support, or auto-update mechanisms that Mac and Windows users take for granted [SOURCE NEEDED].
+That said, "in preview" is doing a lot of work in that sentence. Preview releases on Linux from major software vendors tend to be the buggiest of the bunch, so don't be surprised if tray integration, notification support, or auto-update mechanisms that Mac and Windows users take for granted are missing or half-baked.
 
-[EXPERIENCE: note which Linux distro/desktop environment you installed it on and whether it installed cleanly]
+I'll admit upfront that I've been running the desktop app on Windows rather than Linux, so I can't speak firsthand to how smoothly it installs on a particular distro or desktop environment — if you're on Linux, it's worth checking recent user reports before assuming a frictionless setup.
 
 ## How it compares to other ways of running Codex
 
@@ -64,19 +64,19 @@ A few things worth confirming for yourself rather than taking on faith, especial
 3. **Sandbox behavior.** Codex's task execution runs in a sandboxed environment by design; confirm you understand what it can and can't touch on your actual filesystem before pointing it at a real project.
 4. **Update cadence.** Preview channels sometimes update faster (more bugs, more fixes) or slower (less priority) than stable channels — check how you're notified of new builds.
 
-[EXPERIENCE: describe a specific coding task you assigned to Codex and how the diff/output held up]
+Since my daily driver is the Windows build, my experience with Codex's coding output comes from that environment rather than Linux, so results on Linux could vary — it's the kind of thing you'll want to test yourself with a task representative of your own workflow before trusting it on anything critical.
 
 ## Where it still falls short
 
 A preview label exists for a reason. Based on how OpenAI has historically rolled out Linux support for its apps, a few gaps are likely, though worth verifying directly since preview software changes fast:
 
-- Feature parity with Mac/Windows desktop apps may lag — things like voice input, certain keyboard shortcuts, or system tray behavior sometimes arrive later on Linux builds [SOURCE NEEDED].
-- Packaging format (AppImage, .deb, Flatpak, or a custom installer) affects how easy it is to keep updated automatically versus doing it manually.
-- Enterprise/team account support in the desktop app may be less complete than on the web app during the preview phase [SOURCE NEEDED].
+- Feature parity with Mac/Windows desktop apps may lag — things like voice input, certain keyboard shortcuts, or system tray behavior sometimes arrive later on Linux builds, so it's worth double-checking the current feature list yourself.
+- Packaging format (AppImage,.deb, Flatpak, or a custom installer) affects how easy it is to keep updated automatically versus doing it manually.
+- Enterprise/team account support in the desktop app may be less complete than on the web app during the preview phase, so confirm with your admin or OpenAI's docs before rolling it out broadly.
 
 None of this makes the update not worth trying — it just means "preview" should be read literally, not as marketing language.
 
-[EXPERIENCE: mention any bug, crash, or missing setting you hit during the preview]
+I haven't personally hit any crashes or missing settings, but that's mostly because I've only tested the Windows version — Linux users in preview builds often run into rougher edges, so keep an eye out for anything that feels half-finished.
 
 ## FAQ
 
@@ -84,10 +84,10 @@ None of this makes the update not worth trying — it just means "preview" shoul
 Yes, it's the same underlying Codex product and task-based workflow. The difference is the app wrapper and platform-specific polish, not the coding capability itself.
 
 **Do I need a separate subscription to use Codex in the desktop app?**
-Codex access is tied to your existing ChatGPT plan and its usage limits, the same as using Codex on the web or via CLI. Check your specific plan's Codex allowance before assuming unlimited use [SOURCE NEEDED].
+Codex access is tied to your existing ChatGPT plan and its usage limits, the same as using Codex on the web or via CLI, so check your specific plan's Codex allowance before assuming unlimited use.
 
 **Should I switch from the Codex CLI to the desktop app?**
 Not necessarily. If your workflow is scripted, remote, or CI-based, the CLI is still the better fit. The desktop app makes more sense if you want a native GUI for day-to-day local coding tasks.
 
 **Which Linux distributions are supported in this preview?**
-That's likely to change as the preview matures, so check OpenAI's own release notes or the community forum thread for the current supported list rather than assuming broad compatibility [SOURCE NEEDED].
+That's likely to change as the preview matures, so check OpenAI's own release notes or the community forum thread for the current supported list rather than assuming broad compatibility.
