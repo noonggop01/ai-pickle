@@ -7,7 +7,7 @@ tags: ["Codex","ChatGPT desktop app","Linux","AI coding tools","OpenAI"]
 sourceUrl: "https://community.openai.com/t/codex-in-chatgpt-desktop-app-for-linux-is-now-in-preview/1390027"
 heroImage: "/images/blog/codex-chatgpt-desktop-linux-preview/hero.jpg"
 heroImageAlt: "Codex Comes to ChatGPT Desktop on Linux: What to Know"
-draft: true
+draft: false
 ---
 For a long time, if you were a Linux user who wanted to use OpenAI's Codex through an actual desktop app instead of the browser or a terminal, you were out of luck. Mac and Windows got the native ChatGPT app treatment first; Linux users made do with the web app, unofficial wrappers, or the Codex CLI. That's now changed — Codex support has landed inside the ChatGPT desktop app for Linux, in preview.
 
