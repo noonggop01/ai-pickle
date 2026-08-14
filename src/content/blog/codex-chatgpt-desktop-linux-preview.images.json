@@ -1,0 +1,20 @@
+{
+  "heroImageAlt": "Codex Comes to ChatGPT Desktop on Linux: What to Know",
+  "imageSuggestions": [
+    {
+      "placement": "Hero image at top of article",
+      "concept": "A Linux desktop environment with the ChatGPT app open showing a Codex coding session in a terminal-style panel",
+      "altText": "ChatGPT desktop app running Codex on a Linux desktop"
+    },
+    {
+      "placement": "After the comparison table",
+      "concept": "Split-screen graphic comparing Codex CLI, Codex web, and Codex desktop workflows",
+      "altText": "Diagram comparing three ways to access OpenAI Codex"
+    },
+    {
+      "placement": "Near the FAQ section",
+      "concept": "Close-up screenshot mockup of a Codex task list inside ChatGPT desktop",
+      "altText": "Codex task queue interface inside the ChatGPT desktop app"
+    }
+  ]
+}
