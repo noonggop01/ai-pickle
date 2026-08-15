@@ -1,0 +1,20 @@
+{
+  "heroImageAlt": "How Claude Labels AI-Generated Content (And Why It Matters)",
+  "imageSuggestions": [
+    {
+      "placement": "After intro, before first H2",
+      "concept": "A document icon with a small metadata tag/watermark symbol attached to a corner, suggesting hidden provenance data",
+      "altText": "Illustration of a file with an invisible metadata tag representing AI content marking"
+    },
+    {
+      "placement": "Inside the comparison table section",
+      "concept": "Side-by-side icons of Claude, ChatGPT, and Gemini each with a different labeling symbol (metadata tag, visible watermark, C2PA badge)",
+      "altText": "Comparison icons showing how Claude, ChatGPT, and Gemini each mark AI-generated content differently"
+    },
+    {
+      "placement": "Near the FAQ section",
+      "concept": "A magnifying glass hovering over a document revealing hidden code or metadata tags",
+      "altText": "Magnifying glass revealing hidden metadata markers in an AI-generated document"
+    }
+  ]
+}
