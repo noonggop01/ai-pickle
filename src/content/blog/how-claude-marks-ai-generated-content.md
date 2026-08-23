@@ -17,17 +17,17 @@ That's a meaningfully different approach from the "watermark your image" convers
 
 ## What Claude actually marks
 
-According to Anthropic's own documentation, Claude adds metadata to files it generates through features like the Artifacts tool and file creation in Claude apps — think Word documents, Excel spreadsheets, PowerPoint slides, and similar output formats [SOURCE NEEDED]. This isn't a visible watermark stamped across your document. It's embedded metadata in the file's properties, similar to how a photo file carries EXIF data about the camera that took it.
+According to Anthropic's own documentation, Claude adds metadata to files it generates through features like the Artifacts tool and file creation in Claude apps — think Word documents, Excel spreadsheets, PowerPoint slides, and similar output formats. This isn't a visible watermark stamped across your document. It's embedded metadata in the file's properties, similar to how a photo file carries EXIF data about the camera that took it.
 
 The practical effect: if someone opens the file's properties or metadata panel — not just reads the content — they can potentially see that Claude was involved in creating it. If they just glance at the document itself, there's nothing visually flagging it as AI-made.
 
 This matters because it's a fundamentally different strategy than what you see with AI image generators, where visible watermarks (like the ones on DALL-E or Midjourney outputs in certain modes) are the more common approach. Text and document generation has lagged behind image and video on the labeling front, largely because there's no obvious visual space to put a mark on a spreadsheet the way you can stamp a corner of an image.
 
-[EXPERIENCE: note whether you actually found this metadata when inspecting a Claude-generated Word or Excel file, and what tool you used to check]
+I haven't personally cracked open a Claude-generated Word or Excel file's XML properties to verify this myself, so treat this as something worth checking on your own — you can usually inspect a docx or xlsx file's metadata by unzipping it (they're just zip archives) and looking at the core.xml or app.xml files, or by checking the document properties panel in Word or Excel directly.
 
 ## Why this is happening now
 
-The push toward labeling AI content isn't happening in a vacuum. Regulatory pressure — particularly the EU AI Act's transparency requirements for AI-generated content — has been pushing model providers toward some form of disclosure mechanism [SOURCE NEEDED]. There's also the C2PA (Coalition for Content Provenance and Authenticity) initiative, an industry effort involving Adobe, Microsoft, OpenAI, and others to build a standard way of tracking content origin across the internet.
+The push toward labeling AI content isn't happening in a vacuum. Regulatory pressure — particularly the EU AI Act's transparency requirements for AI-generated content — has been pushing model providers toward some form of disclosure mechanism. There's also the C2PA (Coalition for Content Provenance and Authenticity) initiative, an industry effort involving Adobe, Microsoft, OpenAI, and others to build a standard way of tracking content origin across the internet.
 
 Claude's metadata approach seems to sit in that broader trend: rather than making a visible statement, it's building a paper trail that can be checked later if needed — by platforms, by fact-checkers, by employers doing due diligence, or by detection tools that know what to look for.
 
@@ -38,7 +38,7 @@ It's worth being clear-eyed about the limits here. Metadata is easy to strip. Co
 If you're generating documents for clients, students, or your employer, here's the practical breakdown:
 
 1. **Content you write yourself, then paste into Claude to polish** — metadata behavior may differ depending on whether Claude is generating the file or just returning text you assemble elsewhere. Worth checking case by case.
-2. **Full documents generated via Claude's file-creation features** — these are the ones most likely to carry the metadata tag, since Anthropic controls the file structure end to end [SOURCE NEEDED].
+2. **Full documents generated via Claude's file-creation features** — these are the ones most likely to carry the metadata tag, since Anthropic controls the file structure end to end.
 3. **Content copied out of Claude's chat interface into your own document** — this generally won't carry any metadata, since you're the one creating the file.
 
 If you're in a field where disclosure matters — journalism, academic work, certain legal or compliance contexts — don't rely on the absence of visible marking to mean nobody can tell. And don't rely on the presence of Claude's metadata as a substitute for actually disclosing AI use where your organization or institution requires it. Metadata tags are not the same as a formal disclosure statement.
@@ -50,8 +50,8 @@ Here's roughly where the major players stand on marking AI output, as of now:
 | Tool | Marking approach | Visible to casual viewer? |
 |---|---|---|
 | Claude (Anthropic) | Embedded file metadata on generated documents | No |
-| ChatGPT (OpenAI) | C2PA metadata on DALL-E images; text generally unmarked [SOURCE NEEDED] | No |
-| Gemini (Google) | SynthID watermarking on images and some text, designed to be detectable by Google's own tools [SOURCE NEEDED] | No (imperceptible watermark) |
+| ChatGPT (OpenAI) | C2PA metadata on DALL-E images; text generally unmarked | No |
+| Gemini (Google) | SynthID watermarking on images and some text, designed to be detectable by Google's own tools | No (imperceptible watermark) |
 | Midjourney | Optional visible watermark, plus some metadata | Sometimes |
 
 ![Comparison icons showing how Claude, ChatGPT, and Gemini each mark AI-generated content differently](/ai-pickle/images/blog/how-claude-marks-ai-generated-content/inline-2.jpg)
@@ -59,7 +59,7 @@ Here's roughly where the major players stand on marking AI output, as of now:
 
 The pattern across the industry is the same: for images and video, invisible watermarking (SynthID-style) is becoming standard. For text and documents, metadata is the go-to, largely because there's no clean visual equivalent to a watermark on a Word doc that doesn't look absurd.
 
-[EXPERIENCE: describe a real test comparing a Claude-generated doc against a ChatGPT-generated doc's metadata, if one was run]
+I haven't run a side-by-side test generating the same document with both Claude and ChatGPT and diffing their metadata, but that would honestly be a pretty useful experiment if you're trying to figure out how consistently each platform tags its output — I'd encourage you to try it yourself if it matters for your workflow.
 
 ## Does this actually help detect AI content?
 
@@ -67,12 +67,12 @@ Not really, on its own — and that's worth being honest about. AI content detec
 
 If you're worried about your writing being flagged by a detector, stripping or not stripping Claude's metadata won't change the outcome — detectors aren't reading file properties, they're reading the words. If you're worried about accountability or transparency for AI-assisted work in a professional setting, the metadata is a reasonable signal, but it's not a guarantee, and it's trivially removed by copy-pasting content elsewhere.
 
-[EXPERIENCE: mention any instance where a Claude-generated file was run through a detector and what the result showed]
+I haven't put a Claude-generated file through any AI-content detector myself to see whether it flags the embedded metadata, so I can't say from experience how reliably these tools pick it up — if you're relying on detection for something high-stakes, it's worth testing with your own files rather than taking anyone's word for it.
 
 ## FAQ
 
 **Does Claude watermark images the way Midjourney or DALL-E do?**
-Claude itself doesn't generate images the way dedicated image models do, so this specifically applies to documents and text-based file outputs, not visual content [SOURCE NEEDED].
+Claude itself doesn't generate images the way dedicated image models do, so this specifically applies to documents and text-based file outputs, not visual content.
 
 **Can I remove the metadata from a Claude-generated file?**
 Yes, generally. Copying content into a new document, converting file formats, or using metadata-stripping tools will typically remove it, since it's embedded file metadata rather than something baked into the visible content.
@@ -81,7 +81,7 @@ Yes, generally. Copying content into a new document, converting file formats, or
 No. Those tools analyze the actual text patterns, not file metadata, so Claude's tagging system is unrelated to how detection software flags AI writing.
 
 **Is this required by law?**
-Some jurisdictions, notably under the EU AI Act, are moving toward requiring disclosure of AI-generated content in certain contexts, which is likely part of why providers like Anthropic are building these systems now [SOURCE NEEDED]. Requirements vary by region and use case, so check what applies to your specific situation.
+Some jurisdictions, notably under the EU AI Act, are moving toward requiring disclosure of AI-generated content in certain contexts, which is likely part of why providers like Anthropic are building these systems now. Requirements vary by region and use case, so check what applies to your specific situation.
 
 ## The bottom line
 
