@@ -50,17 +50,18 @@ gh workflow run daily-draft.yml --repo noonggop01/ai-pickle
 
 After `daily-draft.yml` opens a PR, `notify-telegram.mjs` sends a message
 with the title, category, QA summary, a count of remaining
-`[EXPERIENCE]`/`[SOURCE NEEDED]` markers, the PR link, and an
-"✅ Approve & Publish" inline button.
+`[EXPERIENCE]`/`[SOURCE NEEDED]` markers, the PR link, and a `발행`
+reply-keyboard button. The button sends a normal chat message rather than
+an expiring inline callback, so scheduled polling can receive it reliably.
 
 A separate poller workflow asks GitHub Actions to check Telegram every 5
 minutes (`telegram-approve-poller.mjs`) for two kinds of replies. GitHub
 scheduled runs are best-effort, so Telegram API failures are retried and a
 failed update is left unconfirmed for the next run instead of being lost.
 When an older draft is still open, the next daily run also sends a fresh
-Approve button instead of only sending a PR link.
+Publish button instead of only sending a PR link.
 
-**Tapping "✅ 승인하고 발행" (Approve & Publish):**
+**Tapping `발행` (Publish):**
 1. Re-scans the PR's post file(s) for unresolved `[EXPERIENCE:` /
    `[SOURCE NEEDED]` markers. **If any remain, it refuses to publish** and
    replies explaining what's still unresolved.

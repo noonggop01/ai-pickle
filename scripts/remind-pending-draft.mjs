@@ -2,7 +2,7 @@
 
 import { pathToFileURL } from 'node:url';
 import { loadDotEnv } from './lib/env.mjs';
-import { sendMessage } from './lib/telegram.mjs';
+import { approvalReplyKeyboard, sendMessage } from './lib/telegram.mjs';
 
 const MANUAL_APPROVAL_URL =
   'https://github.com/noonggop01/ai-pickle/actions/workflows/telegram-approve.yml';
@@ -26,19 +26,14 @@ async function main() {
       `⏳ 아직 검토 중인 초안 PR #${pr}이 남아 있어 오늘 새 글 생성은 잠시 보류했어요.`,
       '',
       '수정할 내용이 있으면 이 채팅에 한글로 답장해주세요.',
-      '이미 확인을 마쳤다면 아래 버튼을 눌러 발행해주세요.',
-      '버튼 반응이 없으면 이 채팅에 발행이라고 보내주세요.',
-      '승인 후 15분이 지나도 게시되지 않으면 두 번째 버튼에서 Run workflow를 눌러주세요.',
+      '이미 확인을 마쳤다면 채팅창 아래의 발행 버튼을 눌러주세요.',
+      '버튼을 누르면 발행이라는 일반 메시지가 전송되어 더 안정적으로 처리돼요.',
+      `15분이 지나도 게시되지 않으면 수동 실행: ${MANUAL_APPROVAL_URL}`,
       '',
       `초안 전체 보기: ${prUrl}`,
     ].join('\n'),
     {
-      replyMarkup: {
-        inline_keyboard: [
-          [{ text: '✅ 승인하고 발행', callback_data: `approve:${pr}` }],
-          [{ text: '⚡ 15분 지연 시 수동 실행', url: MANUAL_APPROVAL_URL }],
-        ],
-      },
+      replyMarkup: approvalReplyKeyboard(),
     },
   );
 

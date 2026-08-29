@@ -7,6 +7,18 @@ export function isApprovalCommand(text) {
   return typeof text === 'string' && APPROVAL_COMMANDS.has(text.trim().toLowerCase());
 }
 
+// A reply-keyboard button sends an ordinary Telegram message. This is more
+// reliable for the scheduled poller than an inline callback, which can expire
+// or be consumed before the next GitHub Actions run sees it.
+export function approvalReplyKeyboard() {
+  return {
+    keyboard: [[{ text: '발행' }]],
+    resize_keyboard: true,
+    one_time_keyboard: true,
+    selective: true,
+  };
+}
+
 function requireEnv(name) {
   const value = process.env[name];
   if (!value) throw new Error(`${name} is not set.`);
@@ -26,6 +38,7 @@ async function telegramRequest(
     retryDelaysMs = DEFAULT_RETRY_DELAYS_MS,
     fetchImpl = fetch,
     sleepImpl = sleep,
+    timeoutMs = 20000,
   } = {},
 ) {
   const token = requireEnv('TELEGRAM_BOT_TOKEN');
@@ -41,6 +54,7 @@ async function telegramRequest(
         method: httpMethod,
         headers: body ? { 'content-type': 'application/json' } : undefined,
         body: body ? JSON.stringify(body) : undefined,
+        signal: timeoutMs > 0 ? AbortSignal.timeout(timeoutMs) : undefined,
       });
       const raw = await response.text();
       let data;
@@ -58,11 +72,14 @@ async function telegramRequest(
       error.retryAfterMs = Number(data.parameters?.retry_after || 0) * 1000;
       throw error;
     } catch (error) {
-      lastError = error;
-      const retryable = error.retryable !== false;
-      if (!retryable || attempt === retryDelaysMs.length) throw error;
+      const normalizedError = ['AbortError', 'TimeoutError'].includes(error?.name)
+        ? Object.assign(new Error(`Telegram ${method} timed out after ${timeoutMs}ms.`), { retryable: true })
+        : error;
+      lastError = normalizedError;
+      const retryable = normalizedError.retryable !== false;
+      if (!retryable || attempt === retryDelaysMs.length) throw normalizedError;
 
-      const delayMs = error.retryAfterMs || retryDelaysMs[attempt];
+      const delayMs = normalizedError.retryAfterMs || retryDelaysMs[attempt];
       console.warn(`Telegram ${method} attempt ${attempt + 1} failed; retrying in ${delayMs}ms.`);
       await sleepImpl(delayMs);
     }
