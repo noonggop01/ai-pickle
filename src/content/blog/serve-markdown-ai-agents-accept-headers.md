@@ -54,7 +54,7 @@ Accept-header negotiation isn't the only method people are using to make sites m
 
 None of these are mutually exclusive. A pragmatic setup right now is probably an `llms.txt` for discoverability plus Accept-header negotiation (or a Markdown route) for the actual content delivery.
 
-[EXPERIENCE: note on whether you actually tested acceptmarkdown.com or a similar tool against a real site and what the returned Markdown looked like compared to the original HTML]
+I haven't actually run acceptmarkdown.com or a similar tool against a live site myself yet, so I can't say firsthand how closely the returned Markdown matches the original HTML in practice. If you've tried it, I'd genuinely be curious to hear how well it holds up on more complex pages.
 
 ## Setting This Up: What It Actually Takes
 
@@ -66,17 +66,17 @@ If you're running a static site generator (Next.js, Astro, Hugo, etc.), you like
 
 For a WordPress or CMS-driven site, this is harder because content is usually stored as rendered HTML, not Markdown, so you'd need a conversion step (something like Turndown.js) rather than just serving source files.
 
-The honest catch: right now there isn't a single agreed-upon standard for exactly which header value or media type agents should send, and most AI crawlers today — including the big ones from OpenAI and Anthropic [SOURCE NEEDED] — don't consistently request `text/markdown` in the way this pattern assumes. Which means you might build the plumbing and find that very few real requests actually use it yet.
+The honest catch: right now there isn't a single agreed-upon standard for exactly which header value or media type agents should send, and most AI crawlers today — including the major ones you'd expect from OpenAI and Anthropic, though it's worth checking their current documented behavior yourself — don't consistently request `text/markdown` in the way this pattern assumes. Which means you might build the plumbing and find that very few real requests actually use it yet.
 
-[EXPERIENCE: mention of a specific agent or crawler you checked logs for, and whether it actually sent an Accept header requesting Markdown]
+I haven't personally dug through server logs to check whether crawlers like GPTBot or ClaudeBot are actually sending an Accept header requesting Markdown. In general, most bots today still default to requesting standard HTML, so it's worth checking your own logs before assuming otherwise.
 
 ## Is This Actually Worth Doing Right Now?
 
-For most site owners, this falls firmly into "interesting to know about, not urgent to implement" territory — unless you run documentation, a knowledge base, or content that's heavily consumed by RAG pipelines and AI assistants. If your business depends on being cited accurately by ChatGPT or Perplexity, cleaner machine-readable content plausibly helps, though there's no confirmed data yet on whether it improves citation rates or accuracy [SOURCE NEEDED].
+For most site owners, this falls firmly into "interesting to know about, not urgent to implement" territory — unless you run documentation, a knowledge base, or content that's heavily consumed by RAG pipelines and AI assistants. If your business depends on being cited accurately by ChatGPT or Perplexity, cleaner machine-readable content plausibly helps, but you should treat any improvement in citation rates or accuracy as unconfirmed until you see it reflected in your own data.
 
 If you're a developer curious about the mechanics, it's a fun, low-risk weekend project — a few hours of middleware work with essentially zero downside since human visitors never see a change. If you're not technical and rely on a CMS or website builder, this isn't something you can flip on yourself yet; it depends on your platform building in support.
 
-[EXPERIENCE: any measurable change in agent traffic, crawl behavior, or AI-generated citations after implementing something like this]
+I haven't tested this on a real site myself, so I can't report any before-and-after numbers on agent traffic or citation rates. As with most emerging SEO-adjacent tweaks, any impact would probably need to be measured over weeks or months rather than assumed upfront.
 
 ## FAQ
 
@@ -87,7 +87,7 @@ It shouldn't, as long as you're using proper content negotiation (varying the re
 No, though they serve a similar goal. `llms.txt` is a single manifest file describing your site for AI crawlers; Accept-header negotiation changes what gets returned for individual page requests. They complement each other rather than compete.
 
 **Do ChatGPT, Claude, and other AI tools actually request Markdown this way?**
-Not reliably as of now. Most AI crawlers today still fetch and parse standard HTML, then run their own extraction on the client side. This pattern is more of a proposed best practice than something already widely adopted by the major AI companies [SOURCE NEEDED].
+Not reliably as of now. Most AI crawlers today still fetch and parse standard HTML, then run their own extraction on the client side. This pattern is more of a proposed best practice than something you should assume is already widely adopted by the major AI companies, so it's worth verifying against their current documentation before relying on it.
 
 **Do I need special software to do this, or can I build it myself?**
 You don't need a specific paid tool — it's a pattern you implement in your own server or edge middleware. Reference sites like acceptmarkdown.com mainly exist to explain and demonstrate the concept rather than sell a product.
