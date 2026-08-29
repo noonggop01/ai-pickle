@@ -8,7 +8,7 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { splitFrontmatter, getFrontmatterField } from './lib/frontmatter.mjs';
-import { sendMessage } from './lib/telegram.mjs';
+import { approvalReplyKeyboard, sendMessage } from './lib/telegram.mjs';
 import { translateHintsToKorean } from './lib/localize.mjs';
 import { loadDotEnv } from './lib/env.mjs';
 
@@ -76,20 +76,15 @@ async function main() {
     '',
     `전체 보기: ${prUrl}`,
     '',
-    '다 되면 아래 버튼으로 승인하면 발행돼요.',
-    '버튼 반응이 없으면 이 채팅에 발행이라고 보내주세요.',
-    '승인 후 15분이 지나도 게시되지 않으면 두 번째 버튼에서 Run workflow를 눌러주세요.',
+    '다 되면 채팅창 아래의 발행 버튼을 눌러주세요.',
+    '버튼을 누르면 발행이라는 일반 메시지가 전송되어 더 안정적으로 처리돼요.',
+    `15분이 지나도 게시되지 않으면 수동 실행: ${MANUAL_APPROVAL_URL}`,
   );
 
   await sendMessage(
     lines.filter((l) => l !== null).join('\n'),
     {
-      replyMarkup: {
-        inline_keyboard: [
-          [{ text: '✅ 승인하고 발행', callback_data: `approve:${pr}` }],
-          [{ text: '⚡ 15분 지연 시 수동 실행', url: MANUAL_APPROVAL_URL }],
-        ],
-      },
+      replyMarkup: approvalReplyKeyboard(),
     },
   );
 

@@ -20,6 +20,7 @@ import {
   answerCallbackQuery,
   sendMessage,
   isApprovalCommand,
+  approvalReplyKeyboard,
 } from './lib/telegram.mjs';
 import { splitFrontmatter, setFrontmatterField, joinFrontmatter } from './lib/frontmatter.mjs';
 import { localizePlaceholders } from './lib/localize.mjs';
@@ -158,7 +159,9 @@ async function processApproval(prNumber) {
   await markPublishedForWorkflow();
 
   try {
-    await sendMessage(`🎉 발행됐어요! ${SITE_URL}/blog/${slug}/`);
+    await sendMessage(`🎉 발행됐어요! ${SITE_URL}/blog/${slug}/`, {
+      replyMarkup: { remove_keyboard: true },
+    });
   } catch (error) {
     console.warn(`Post was published, but the Telegram success message failed: ${error.message}`);
   }
@@ -210,10 +213,8 @@ async function processLocalizeNotes(koreanNotes) {
       `${totalFilled}개 반영했어요. 아직 ${remaining}개 남았어요 — 계속 답장하시거나 PR에서 직접 채워주세요: ${pr.url}`,
     );
   } else {
-    await sendMessage(`${totalFilled}개 다 반영했어요! 확인하고 승인해주세요: ${pr.url}\n\n버튼 반응이 없으면 이 채팅에 발행이라고 보내주세요.`, {
-      replyMarkup: {
-        inline_keyboard: [[{ text: '✅ 승인하고 발행', callback_data: `approve:${pr.number}` }]],
-      },
+    await sendMessage(`${totalFilled}개 다 반영했어요! 확인한 뒤 채팅창 아래의 발행 버튼을 눌러주세요: ${pr.url}`, {
+      replyMarkup: approvalReplyKeyboard(),
     });
   }
 }

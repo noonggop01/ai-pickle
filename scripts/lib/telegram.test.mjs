@@ -1,6 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { confirmUpdatesThrough, getUpdates, isApprovalCommand } from './telegram.mjs';
+import {
+  approvalReplyKeyboard,
+  confirmUpdatesThrough,
+  getUpdates,
+  isApprovalCommand,
+} from './telegram.mjs';
 
 process.env.TELEGRAM_BOT_TOKEN = 'test-token';
 
@@ -68,4 +73,24 @@ test('recognizes exact Telegram approval commands', () => {
   assert.equal(isApprovalCommand('publish'), true);
   assert.equal(isApprovalCommand('이 글을 발행해주세요'), false);
   assert.equal(isApprovalCommand('수정할 내용입니다'), false);
+});
+
+test('approval keyboard sends the exact text command handled by the poller', () => {
+  const keyboard = approvalReplyKeyboard();
+  assert.equal(keyboard.keyboard[0][0].text, '발행');
+  assert.equal(isApprovalCommand(keyboard.keyboard[0][0].text), true);
+  assert.equal(keyboard.one_time_keyboard, true);
+});
+
+test('Telegram requests include a finite network timeout', async () => {
+  let signal;
+  await getUpdates({
+    retryDelaysMs: [],
+    fetchImpl: async (_url, options) => {
+      signal = options.signal;
+      return jsonResponse({ ok: true, result: [] });
+    },
+  });
+
+  assert.equal(signal instanceof AbortSignal, true);
 });
