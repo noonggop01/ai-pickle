@@ -7,7 +7,7 @@ tags: ["AI agents","content negotiation","Markdown","web infrastructure","AI cra
 heroImageAlt: "Diagram showing a server sending HTML to a browser and Markdown to an AI agent based on Accept header"
 sourceUrl: "https://acceptmarkdown.com/"
 heroImage: "/images/blog/serve-markdown-ai-agents-accept-headers/hero.jpg"
-draft: true
+draft: false
 ---
 If you run a website and you've noticed ChatGPT, Claude, or some autonomous agent hitting your pages more often than actual humans lately, you're not imagining it. And a small but growing corner of the web dev world has started asking a genuinely interesting question: instead of making AI agents scrape your bloated HTML and strip out the nav bars, ads, and cookie banners just to get to your actual content, why not just hand them clean Markdown directly?
 
