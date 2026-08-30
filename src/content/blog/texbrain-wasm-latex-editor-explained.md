@@ -36,15 +36,15 @@ Running a full TeX engine in WASM sounds free of downsides until you actually us
 3. **Complex bibliographies and multi-pass compilation** (BibTeX/biber, cross-references that need multiple compile passes) can behave differently than a native TeX install, depending on how complete the toolchain is.
 4. **No collaboration layer out of the box.** Overleaf's real value for a lot of academic users isn't the compiler — it's real-time co-editing with an advisor or co-author. A local-first WASM editor has to solve that separately, if at all.
 
-[EXPERIENCE: note actual compile time for a real multi-file thesis-style document with bibliography, first load vs cached]
+I haven't personally tested this with a full multi-file thesis-style document with a bibliography yet, so I can't give exact first-load versus cached compile times from my own experience. In general, though, you can expect the first compile to take noticeably longer while everything initializes, with subsequent compiles speeding up once things are cached.
 
 ## How It Stacks Up Against the Alternatives
 
 | Tool | Where it compiles | Collaboration | Offline use | Cost |
 |---|---|---|---|---|
-| Overleaf (free) | Cloud servers | Real-time, built-in | No | Free tier, paid plans for more compile time/collaborators [SOURCE NEEDED] |
+| Overleaf (free) | Cloud servers | Real-time, built-in | No | Free tier, with paid plans reportedly offering more compile time and collaborators—worth checking Overleaf's current pricing page for the latest details |
 | Local TeX Live + editor (VS Code, TeXstudio) | Your machine | None built-in (needs Git/Overleaf sync) | Yes | Free, but multi-GB install |
-| TeXbrain (WASM) | Your browser tab | Unclear/limited at this stage | Yes, once cached | Free (open source project) [SOURCE NEEDED] |
+| TeXbrain (WASM) | Your browser tab | Unclear/limited at this stage | Yes, once cached | Free, as it's an open source project—but double-check the repo for the current licensing and any usage terms |
 | SwiftLaTeX / TeXLive.js | Browser (WASM) | No | Yes | Free, open source |
 
 ![Diagram comparing cloud-based LaTeX compiling versus in-browser WASM compiling](/ai-pickle/images/blog/texbrain-wasm-latex-editor-explained/inline-2.jpg)
@@ -60,7 +60,7 @@ We're already seeing this with browser-based image editors running diffusion mod
 
 For LaTeX users specifically who also lean on AI tools, the practical workflow question is usually: where do you draft the prose, and where do you compile it? Plenty of people already draft explanatory text or abstracts in a chatbot, then paste into LaTeX for formatting. A local compiler like TeXbrain doesn't change that workflow much, but it does mean the compiling step doesn't require sending your document (which might contain unpublished research) to a third-party server at all.
 
-[EXPERIENCE: describe a specific package or command that failed to compile in TeXbrain and how you worked around it]
+I haven't run into a specific package or command failure in TeXbrain myself, so I don't have a concrete workaround story to share here. As with any newer LaTeX environment, it's worth expecting that some packages may not be fully supported yet, so testing your specific setup early is a good idea.
 
 ## Should You Actually Switch?
 
@@ -68,15 +68,15 @@ Probably not entirely, and probably not yet. If you're already comfortable in Ov
 
 It's also worth remembering this is a young, single-maintainer-style open source project based on the GitHub repo — not a funded product with a support team. Expect rough edges, expect package gaps, and check the issue tracker before betting a deadline on it.
 
-[EXPERIENCE: mention whether you filed or found an open GitHub issue that affected your document]
+I haven't gone looking through TeXbrain's GitHub issues myself, so I can't point to a specific bug report that matched something I ran into. If you hit a snag, it's probably worth checking their issue tracker to see if it's a known limitation before assuming it's something you're doing wrong.
 
 ## FAQ
 
 **Does TeXbrain require an account or internet connection to compile?**
-No account is needed for the core compiling functionality, since pdfTeX runs locally via WASM. You'll need an internet connection at least once to load the app and any packages it fetches, after which cached use should work offline. [SOURCE NEEDED]
+No account is needed for the core compiling functionality, since pdfTeX runs locally via WASM. You'll need an internet connection at least once to load the app and any packages it fetches, after which cached use should work offline—though it's worth testing this yourself to confirm offline behavior matches your expectations.
 
 **Is my document private if I use TeXbrain instead of Overleaf?**
-The compile step happens locally in your browser, so your document content doesn't need to be sent to a server just to produce a PDF. That said, check the project's privacy practices around any analytics, syncing, or storage features before assuming full privacy. [SOURCE NEEDED]
+The compile step happens locally in your browser, so your document content doesn't need to be sent to a server just to produce a PDF. That said, check the project's privacy practices around any analytics, syncing, or storage features before assuming full privacy.
 
 **Can TeXbrain replace Overleaf for collaborative writing?**
 Not really, at least not currently. Overleaf's main value for teams is real-time co-authoring, version history, and comments — features a browser-compiled WASM editor would need to build separately.
