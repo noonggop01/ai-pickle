@@ -1,0 +1,20 @@
+{
+  "heroImageAlt": "Diagram showing a server sending HTML to a browser and Markdown to an AI agent based on Accept header",
+  "imageSuggestions": [
+    {
+      "placement": "After intro, before first H2",
+      "concept": "Simple diagram of an HTTP request/response showing an Accept header branching to either HTML or Markdown output",
+      "altText": "HTTP content negotiation diagram splitting HTML and Markdown responses based on Accept header"
+    },
+    {
+      "placement": "Within the comparison table section",
+      "concept": "Side-by-side screenshot mockup of a webpage rendered as HTML versus its stripped-down Markdown equivalent",
+      "altText": "Comparison of a webpage shown as full HTML versus clean Markdown text"
+    },
+    {
+      "placement": "Near the setup section",
+      "concept": "Code snippet screenshot of middleware checking an Accept header in a Next.js or edge function",
+      "altText": "Code example of server middleware checking the Accept header for text/markdown"
+    }
+  ]
+}
