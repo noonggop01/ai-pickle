@@ -1,0 +1,15 @@
+{
+  "heroImageAlt": "Browser window showing a LaTeX code editor next to a compiled PDF preview, representing in-browser WASM compilation",
+  "imageSuggestions": [
+    {
+      "placement": "After intro, before 'What TeXbrain Actually Does'",
+      "concept": "Split-screen screenshot mockup of a LaTeX source editor and rendered PDF preview in a browser tab",
+      "altText": "Split view of LaTeX code and compiled PDF output inside a browser-based editor"
+    },
+    {
+      "placement": "Within the comparison table section",
+      "concept": "Simple diagram contrasting cloud-compile (arrow to server and back) vs local WASM-compile (loop within browser)",
+      "altText": "Diagram comparing cloud-based LaTeX compiling versus in-browser WASM compiling"
+    }
+  ]
+}
