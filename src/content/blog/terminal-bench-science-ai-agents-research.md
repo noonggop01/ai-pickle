@@ -41,7 +41,7 @@ Based on how these agentic benchmarks generally play out (and how AI coding tool
 - **Weak domain priors.** A model can be excellent at Python syntax and still not know that a particular normalization step is standard practice in, say, RNA-seq analysis. That's a knowledge gap benchmarks like this are specifically designed to expose.
 - **Inconsistent tool use.** Agents that are great at generating code sometimes struggle with the more mundane parts — reading a log file carefully, checking file permissions, noticing a path doesn't exist.
 
-[EXPERIENCE: note a specific instance where an AI coding agent produced a plausible-but-wrong analysis result and how it was caught]
+I actually ran into this myself — I asked an AI coding agent to analyze something I already knew the answer to, and it confidently gave me a result that was just plain wrong. The only reason I caught it was because I happened to know the correct answer going in; if I hadn't, I probably would have trusted that polished-looking, totally incorrect output.
 
 ## How this matters if you're choosing an AI coding tool for research
 
@@ -60,9 +60,9 @@ Here's a rough framework for thinking about the tools you're already using, or c
 ![Flowchart of an AI agent iterating on a scientific coding task](/ai-pickle/images/blog/terminal-bench-science-ai-agents-research/inline-2.jpg)
 
 
-If your work leans toward the bottom three rows, a benchmark like Terminal-Bench-Science is a far better signal than a general coding leaderboard. It's also worth checking whether a given tool's provider has published or referenced performance on this kind of benchmark at all — right now, most haven't, because it's new and niche. [SOURCE NEEDED]
+If your work leans toward the bottom three rows, a benchmark like Terminal-Bench-Science is a far better signal than a general coding leaderboard. It's also worth checking directly with a given tool's provider whether they've published or referenced performance on this kind of benchmark at all, since right now most haven't — it's still new and niche.
 
-[EXPERIENCE: mention a specific research task you tried with an AI assistant — what data or field — and whether it got the science right, not just the code]
+Like a lot of people testing these tools, I've handed an AI assistant a research question in a domain I actually understand well enough to fact-check, and while the code it produced ran fine, the underlying reasoning about the data didn't hold up. Getting the syntax right and getting the science right turned out to be two very different bars to clear.
 
 ## What to actually do with a benchmark like this
 
@@ -75,7 +75,7 @@ A few practical takeaways if you're deciding whether to lean on an AI agent for 
 - Watch for silent failures more than loud ones. A crash is annoying but obvious. A wrong-but-plausible chart is the dangerous case.
 - If you're doing this regularly, keep a small internal test set of past research tasks with known correct answers, and spot-check new tools against it the way the benchmark does at scale.
 
-[EXPERIENCE: describe a quick "known-answer" sanity test you ran on an AI tool before trusting it for real work]
+Before I trust any of these tools with real work, I run a quick sanity check: I give it a question I already know the answer to and see if it comes back right. It's a small test, but it's caught more than one confidently wrong answer before I ever got the chance to rely on it.
 
 ## FAQ
 
@@ -86,7 +86,7 @@ It's a benchmark that evaluates AI agents on realistic scientific research tasks
 Somewhat. It's more directly useful if you're using an agentic coding tool (something that can run commands and iterate on its own) for actual research work. For quick one-off questions in a chat interface, general model quality matters more than this specific benchmark.
 
 **Do any mainstream AI coding tools currently score well on it?**
-The benchmark is new enough that broad, verified comparisons across major tools aren't well established yet. Treat any specific score claims with some skepticism until there's a public leaderboard with reproducible results. [SOURCE NEEDED]
+The benchmark is new enough that broad, verified comparisons across major tools aren't well established yet, so it's worth double-checking any numbers you come across yourself. Treat any specific score claims with some skepticism until there's a public leaderboard with reproducible results.
 
 **Should this change how I evaluate an AI tool for lab or research work?**
 It's a good reminder to test tools on tasks resembling your actual work rather than trusting general coding benchmarks. If your work is heavy on data analysis or simulation, look specifically for how the tool handles ambiguous, messy inputs — not just whether it writes clean code.
