@@ -7,7 +7,7 @@ tags: ["LaTeX","WASM","Overleaf alternative","developer tools","browser tools"]
 heroImageAlt: "Browser window showing a LaTeX code editor next to a compiled PDF preview, representing in-browser WASM compilation"
 sourceUrl: "https://github.com/swimmingbrain/texbrain"
 heroImage: "/images/blog/texbrain-wasm-latex-editor-explained/hero.jpg"
-draft: true
+draft: false
 ---
 If you've ever tried to write a LaTeX document without installing a multi-gigabyte TeX distribution or paying for Overleaf's premium tiers, you know the pain. TeXbrain, a project that showed up recently on Hacker News, takes a different approach: it compiles pdfTeX directly in your browser using WebAssembly, no server round-trip required for the actual typesetting.
 
