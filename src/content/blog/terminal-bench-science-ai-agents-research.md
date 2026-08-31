@@ -7,7 +7,7 @@ tags: ["AI agents","benchmarks","AI coding tools","scientific computing","resear
 heroImageAlt: "A terminal window running an AI agent script alongside scientific data plots and lab notebook files"
 sourceUrl: "https://www.terminal-bench-science.ai/announcement"
 heroImage: "/images/blog/terminal-bench-science-ai-agents-research/hero.jpg"
-draft: true
+draft: false
 ---
 Most AI coding benchmarks ask a model to fix a bug, pass a unit test, or ship a small feature. Terminal-Bench-Science asks something harder: can an AI agent sit down at a real terminal, poke around a messy research environment, and actually do science — pull data, run an analysis, debug a broken pipeline, and produce a result that holds up?
 
