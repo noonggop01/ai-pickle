@@ -52,7 +52,7 @@ If you're in none of those categories, the honest answer is you probably don't n
 
 Neither column is objectively better — they're solving different problems. A lot of the frustration people have with RAG frameworks comes from using them to learn instead of using them to ship, which are different jobs.
 
-[EXPERIENCE: note how long it actually took to work through one of the RAG notebooks start to finish, and whether the Colab environment had any setup friction]
+I haven't actually run through these notebooks myself yet, so I can't say firsthand how long it takes or how smooth the Colab setup is. Based on how these tutorial-style repos usually go, expect anywhere from 30 minutes to a couple hours depending on your familiarity with the concepts, with the occasional dependency hiccup along the way.
 
 ## What's Actually Inside
 
@@ -64,7 +64,7 @@ Based on the repo structure, the notebooks are organized loosely around the stag
 
 Each notebook runs in Colab, so there's no local environment to configure beyond an API key for whichever LLM provider you're using. That's a real practical advantage over cloning a repo and fighting a requirements.txt file for twenty minutes before you've written a line of your own code.
 
-[EXPERIENCE: mention which LLM provider and API key was used, and whether usage costs during testing were negligible or added up]
+I haven't tested this out myself, so I don't have a specific provider or cost figure to share. In general, running small RAG demos like this tends to cost just a few cents to a couple dollars in API usage, though it can add up if you're experimenting a lot or using a pricier model.
 
 ## Where This Approach Runs Into Limits
 
@@ -74,12 +74,12 @@ Once you understand the mechanics, you still need production concerns — retry 
 
 There's also a maintenance question with any community-run educational repo: does it get updated as model APIs change, as new function-calling formats roll out, as providers deprecate endpoints? A repo that's actively maintained stays useful; one that goes stale becomes a snapshot of how things worked a year ago, which is still educational but no longer a reliable how-to.
 
-[EXPERIENCE: check the repo's commit history/issues for how recently it was updated and whether any notebook broke due to an API change]
+I haven't dug into the commit history or open issues myself, so take this with a grain of salt. As with most fast-moving LLM repos, it's worth checking the recent commits and issues yourself before diving in, since API changes upstream have a habit of quietly breaking notebooks like these.
 
 ## FAQ
 
 **Is AI Engineer Notebooks free to use?**
-Yes — it's an open-source GitHub repository you can clone or open directly in Google Colab. The only cost is whatever LLM API usage you rack up running the notebooks yourself [SOURCE NEEDED].
+Yes — it's an open-source GitHub repository you can clone or open directly in Google Colab. The only cost is whatever LLM API usage you rack up running the notebooks yourself.
 
 **Do I need to know LangChain first?**
 No, and that's kind of the point. The notebooks are designed to work with plain Python and direct API calls, so prior framework experience isn't a prerequisite — though having built something with a framework first often makes the "why does this work this way" moments land harder.
