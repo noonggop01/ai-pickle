@@ -1,0 +1,20 @@
+{
+  "heroImageAlt": "A terminal window running an AI agent script alongside scientific data plots and lab notebook files",
+  "imageSuggestions": [
+    {
+      "placement": "After the intro",
+      "concept": "Split screen of a terminal command line and a scientific plot/graph output",
+      "altText": "Terminal command line next to a generated scientific chart"
+    },
+    {
+      "placement": "Before the comparison table",
+      "concept": "Diagram showing an AI agent looping through code, error, and data-analysis steps",
+      "altText": "Flowchart of an AI agent iterating on a scientific coding task"
+    },
+    {
+      "placement": "Near the FAQ section",
+      "concept": "Screenshot mockup of a benchmark leaderboard with model names and pass rates",
+      "altText": "Mockup leaderboard showing AI model scores on research tasks"
+    }
+  ]
+}
