@@ -7,7 +7,7 @@ tags: ["RAG","AI agents","LLM evals","Google Colab","AI engineering","open sourc
 sourceUrl: "https://github.com/calmrocks/ai-engineer-notebooks"
 heroImage: "/images/blog/ai-engineer-notebooks-framework-free-rag-agents-evals/hero.jpg"
 heroImageAlt: "AI Engineer Notebooks: Learn RAG and Agents Without"
-draft: true
+draft: false
 ---
 Most people learning RAG and agents today start with LangChain or LlamaIndex, follow a tutorial, get something working, and then hit a wall the moment it breaks. The abstraction that made the demo look easy is the same abstraction that hides what's actually going wrong. That's the itch AI Engineer Notebooks is trying to scratch: a free, open-source collection of Google Colab notebooks that teach retrieval-augmented generation, agents, and evaluation using plain Python and direct API calls — no framework in the middle.
 
