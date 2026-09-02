@@ -1,0 +1,20 @@
+{
+  "heroImageAlt": "AI Engineer Notebooks: Learn RAG and Agents Without",
+  "imageSuggestions": [
+    {
+      "placement": "hero",
+      "concept": "A split-screen illustration showing raw Python code on one side and a tangle of framework logos crossed out on the other",
+      "altText": "Illustration contrasting plain Python code with crossed-out AI framework logos"
+    },
+    {
+      "placement": "after intro",
+      "concept": "Screenshot-style mockup of a Colab notebook with a RAG pipeline built from plain Python cells",
+      "altText": "Mockup of a Google Colab notebook showing a framework-free RAG pipeline"
+    },
+    {
+      "placement": "in comparison table section",
+      "concept": "Simple diagram comparing a framework-based RAG stack versus a bare-bones RAG stack",
+      "altText": "Diagram comparing framework-heavy and framework-free RAG architecture"
+    }
+  ]
+}
