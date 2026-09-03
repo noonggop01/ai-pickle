@@ -1,0 +1,15 @@
+{
+  "heroImageAlt": "Diagram showing the Codex sandbox environment calling a headless LibreOffice instance to convert an Office document",
+  "imageSuggestions": [
+    {
+      "placement": "After intro, before 'The problem Codex is actually solving'",
+      "concept": "Simple diagram of Codex sandbox with a LibreOffice icon inside a box, arrows showing docx/xlsx files going in and out",
+      "altText": "Illustration of the Codex sandbox containing a headless LibreOffice engine processing document files"
+    },
+    {
+      "placement": "Within the comparison table section",
+      "concept": "Side-by-side icons of Codex, Microsoft Copilot, and Google Gemini logos over office document icons",
+      "altText": "Comparison graphic of different AI tools handling Word, Excel, and PowerPoint files"
+    }
+  ]
+}
