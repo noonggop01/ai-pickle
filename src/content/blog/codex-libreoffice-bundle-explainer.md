@@ -7,7 +7,7 @@ tags: ["Codex","ChatGPT","AI Coding Tools","OpenAI","LibreOffice"]
 heroImageAlt: "Diagram showing the Codex sandbox environment calling a headless LibreOffice instance to convert an Office document"
 sourceUrl: "https://simonwillison.net/2026/Sep/1/codex-libreoffice/"
 heroImage: "/images/blog/codex-libreoffice-bundle-explainer/hero.jpg"
-draft: true
+draft: false
 ---
 If you've poked around inside the ChatGPT/Codex desktop app or its sandboxed environment, you may have stumbled on something odd: a full copy of LibreOffice sitting in there. Not a plugin, not a lightweight parser — the actual open-source office suite, complete with Writer, Calc, and Impress, bundled into an AI coding tool. That sounds like bloat until you understand what it's actually being used for, and then it starts to look like one of the more pragmatic engineering decisions in the current wave of AI agent tooling.
 
