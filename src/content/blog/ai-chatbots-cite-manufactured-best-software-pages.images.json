@@ -1,0 +1,15 @@
+{
+  "heroImageAlt": "A search results page dissolving into a wall of AI chatbot text, symbolizing manufactured content feeding AI answers",
+  "imageSuggestions": [
+    {
+      "placement": "After intro, before H2 'How a Best Of Page Farm Actually Works'",
+      "concept": "A conveyor belt of identical webpage templates being stamped out, each with a different keyword swapped in",
+      "altText": "Illustration of a content assembly line churning out identical 'best software' pages with different keywords"
+    },
+    {
+      "placement": "Within the 'What This Looks Like From the Reader's Side' section, near the comparison table",
+      "concept": "Split screen showing a generic templated review versus a detailed hands-on review with visible notes and screenshots",
+      "altText": "Side-by-side comparison of a generic templated software review versus a detailed hands-on review"
+    }
+  ]
+}
