@@ -7,7 +7,7 @@ tags: ["Perplexity","AI search","software reviews","SEO","AI chatbots","content 
 heroImageAlt: "A search results page dissolving into a wall of AI chatbot text, symbolizing manufactured content feeding AI answers"
 sourceUrl: "https://trellner.com/reports/manufactured-sources-behind-ai-recommendations/"
 heroImage: "/images/blog/ai-chatbots-cite-manufactured-best-software-pages/hero.jpg"
-draft: true
+draft: false
 ---
 You ask an AI chatbot for the "best project management software" or the "top AI writing tools," and it gives you a confident, tidy answer with sources. Feels solid, right? A recent report on manufactured recommendation sources suggests you might want to slow down before trusting that list.
 
