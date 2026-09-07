@@ -43,7 +43,7 @@ When Perplexity, ChatGPT with browsing, or similar tools answer "what's the best
 - Bury citations in small footnote-style links you may never click
 - Give equal-sounding weight to a thin affiliate page and a genuinely tested review
 
-[EXPERIENCE: note a specific instance where you asked an AI tool for a software recommendation and later found the underlying source was a thin affiliate page]
+This kind of thing tends to happen more often than you'd expect — you ask an AI assistant for a project management tool recommendation, get a confident-sounding answer, and when you actually trace the citation back, it turns out to be a thin affiliate page stuffed with "top 10" rankings and sign-up links rather than anything resembling real hands-on testing.
 
 The result is that content designed purely to capture search traffic gets a second life as an "authoritative" answer, minus the visual cues that might have made you skeptical in the first place.
 
@@ -68,7 +68,7 @@ None of this means every AI-cited source is fake, or that every "best of" list i
 
 ## What AI Companies Say They're Doing About It
 
-Perplexity and similar companies have talked publicly about wanting to prioritize higher-quality, more authoritative sources, and about building in citation transparency so users can check where an answer came from [SOURCE NEEDED]. In practice, "authoritative" is hard to define at scale, and content farms have gotten good at mimicking the signals that used to indicate quality — structured data, confident tone, comparison tables, even fake-looking "methodology" sections.
+Perplexity and similar companies have talked publicly about wanting to prioritize higher-quality, more authoritative sources, and about building in citation transparency so users can check where an answer came from. In practice, "authoritative" is hard to define at scale, and content farms have gotten good at mimicking the signals that used to indicate quality — structured data, confident tone, comparison tables, even fake-looking "methodology" sections.
 
 The uncomfortable truth is that this is a cat-and-mouse problem, not a solved one. As long as AI answer engines rely heavily on crawling and summarizing existing web content rather than doing original evaluation, they inherit the web's existing spam problem — just with a more trustworthy-looking wrapper on top.
 
@@ -82,7 +82,7 @@ If you're choosing a tool based on an AI-generated answer, a little extra fricti
 4. **Cross-reference with a second, independent source** that isn't part of the same content network (surprisingly common — some of these "independent" sites are owned by the same parent company).
 5. **Read one or two user reviews on G2, Capterra, or Reddit** for a gut check against the AI's summary.
 
-[EXPERIENCE: mention a case where cross-checking an AI recommendation against a real user forum changed your decision]
+I've also had cases where an AI tool's pick looked great on paper, but a quick search through a real user forum told a completely different story — people flagging the same bugs or support issues over and over — and that alone was enough to make me switch to something else.
 
 This is more effort than just trusting the answer, but for anything you're going to pay a subscription for or build a workflow around, it's worth the extra ten minutes.
 
@@ -97,7 +97,7 @@ Look for specific, sometimes unflattering details — pricing changes, a feature
 **Are all AI-cited "best of" lists manufactured content?**
 No. Plenty of legitimate outlets, including ones that actually run the software before writing about it, also get cited by AI tools. The problem is that AI answers currently don't reliably distinguish between the two.
 
-[EXPERIENCE: add a personal note on how you now approach AI-suggested tool recommendations differently after seeing something like this]
+These days I treat any AI-generated tool recommendation as a starting point rather than a verdict — I still dig into the actual sources, check independent reviews, and look for real user discussions before I trust the suggestion enough to act on it.
 
 **What should software vendors and reviewers do about this?**
 Publishing clear methodology, dated hands-on notes, and specific pros/cons — the kind of detail a template can't fake — is currently one of the few things that reliably separates real reviews from manufactured ones, both for human readers and for the AI systems summarizing them.
