@@ -1,0 +1,20 @@
+{
+  "heroImageAlt": "Multiple AI chatbot logos displayed with red error/offline indicators over a cloud server background",
+  "imageSuggestions": [
+    {
+      "placement": "After introduction",
+      "concept": "A split-screen graphic showing error screens from ChatGPT, Claude, and Grok side by side",
+      "altText": "Error messages shown simultaneously on ChatGPT, Claude, and Grok interfaces"
+    },
+    {
+      "placement": "Within the infrastructure section",
+      "concept": "A simplified diagram showing how OpenAI, Anthropic, and xAI connect to shared cloud/CDN providers underneath",
+      "altText": "Diagram of AI companies sharing underlying cloud and CDN infrastructure"
+    },
+    {
+      "placement": "Near the status page table",
+      "concept": "Screenshot-style mockup of a status page showing a service disruption banner",
+      "altText": "Mockup of an AI service status page showing an active outage notice"
+    }
+  ]
+}
